@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 {
   time_t start,end;
   graph* g = generate_easy_graph(argv[1]);
-  g->display_upper();
+//   g->display_upper();
   print("solving sequential...");
   time(&start);
   sequential_maxflow(g);
