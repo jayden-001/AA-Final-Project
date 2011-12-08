@@ -28,7 +28,7 @@ void sequential_maxflow(graph* g)
 	s->set_height(g->n());
 	
 	// loop
-// 	while (Q.size() != 0) {
-// 		discharge(&Q);
-// 	}
+	while (Q.size() != 0) {
+		discharge(&Q, g->s(), g->t());
+	}
 }

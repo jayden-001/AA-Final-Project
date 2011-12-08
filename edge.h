@@ -63,7 +63,7 @@ int edge::residue(vertex* v)
 		return _upper12 - _flow;
 	else {
 		assert(v == _v2);
-		return _flow;
+		return _upper21 + _flow;
 	}	
 }
 

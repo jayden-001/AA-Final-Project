@@ -33,6 +33,7 @@ class vertex
 		vector<edge*>* edges();
 		edge* next_edge();
 		edge* cur_edge();
+		bool is_last();
 };
 
 vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0)
@@ -54,12 +55,13 @@ void vertex::set_height(int i)
 edge* vertex::next_edge()
 {
 	int s = _edges.size();
+	_cur_edge++;
 	if (_cur_edge < s){
-		return _edges[_cur_edge++];
+		return _edges[_cur_edge];
 	}
 	else {
 		_cur_edge = 0;
-		return 0;
+		return _edges[_cur_edge];
 	}
 }
 
@@ -74,6 +76,11 @@ void vertex::update_excess(int i)
 edge* vertex::cur_edge()
 {
 	return _edges[_cur_edge];
+}
+
+bool vertex::is_last()
+{
+	return _cur_edge == _edges.size() - 1;
 }
 
 vector<edge*>* vertex::edges() { return &_edges; }
