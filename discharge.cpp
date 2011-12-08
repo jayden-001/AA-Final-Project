@@ -19,15 +19,16 @@ void pulse(graph &g)
 	cilk_for (int i = 2; i < g.v()->size(); ++i) {
 		vertex *v = &vertices->at(i);
 		edges = v->edges();
-		cilk_for (int j = 0; j < edges->size() 
-			&& v->excess() > 0; ++j) {
-			edge *e = edges->at(j);
-			if (e->residue(v) > 0 &&
-				v->height() == e->opposite(v)->height()+1)
-			{
-				d = min(v->excess(), e->residue(v));
-				v->adjust_excess(-d);
-				e->update_flow(v);
+		cilk_for (int j = 0; j < edges->size(); ++j) {
+			if (v->excess() > 0) {
+				edge *e = edges->at(j);
+				if (e->residue(v) > 0 &&
+					v->height() == e->opposite(v)->height()+1)
+				{
+					d = min(v->excess(), e->residue(v));
+					v->update_excess(-d);
+					e->update_flow(v, d);
+				}
 			}
 		}
 	}			
