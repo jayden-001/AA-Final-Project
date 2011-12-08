@@ -78,7 +78,7 @@ graph* generateEasyGraph()
 	// creating
 	graph* g = new graph();
 	for (int i = 2; i < n; i++) {
-		g->add_vertex();
+		g->add_vertex(i);
 	}
 	for (int v1 = 0; v1 < n; v1++) {
 		for (int v2 = v1+1; v2 < n; v2++) {

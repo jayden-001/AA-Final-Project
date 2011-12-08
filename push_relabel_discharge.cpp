@@ -9,6 +9,30 @@
 
 using namespace std;
 
+vector<int> excess_tmp;
+
+void pulse(graph &g)
+{
+	vector<vertex>* vertices = g.v();
+	vector<edge*>* edges;
+	int d;
+	cilk_for (int i = 2; i < g.v()->size(); ++i) {
+		vertex *v = &vertices->at(i);
+		edges = v->edges();
+		cilk_for (int j = 0; j < edges->size() 
+			&& v->excess() > 0; ++j) {
+			edge *e = edges->at(j);
+			if (e->residue(v) > 0 &&
+				v->height() == e->opposite(v)->height()+1)
+			{
+				d = min(v->excess(), e->residue(v));
+				v->adjust_excess(-d);
+				e->update_flow(v);
+			}
+		}
+	}			
+}
+
 void push(vertex* v, edge *e)
 {
         assert(v->excess() > 0);
@@ -19,7 +43,6 @@ void push(vertex* v, edge *e)
 	vertex* w = e->opposite(v);
 	v->update_excess(-1*d);
 	w->update_excess(d);	
-
 }
 
 void relabel(vertex*v)
@@ -27,7 +50,6 @@ void relabel(vertex*v)
 	vector<edge*>* edges = v->edges();
 	int numOfEdges = edges->size();
 	int minHeight = INT_MAX;
-
 	 for( int i = 0; i <numOfEdges; i++){
                 edge* currentEdge = (*edges)[i];
                 vertex* w = currentEdge->opposite(v);
@@ -37,6 +59,17 @@ void relabel(vertex*v)
 
         }
 	
+	edge &currentEdge;
+	for (int i = 0; i <numOfEdges, i++){
+		currentEdge = edges->at(i);
+		vertex& w = *(currentEdge.opposite(v));
+		if ( currentEdge.residue(v) > 0 &&
+		     v.height() == w.height() + 1 )
+			push(v, currentEdge);
+		if (currentEdge.residue(v) > 0 && w.height()+1 < minHeight)
+			minHeight =  w.height()+1;
+		v.set_height(minHeight);
+	}
 }
 
 void push_relabel(vertex* v)

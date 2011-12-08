@@ -18,7 +18,7 @@ class graph
 	public:
 		graph();
 		
-		int add_vertex();
+		int add_vertex(int);
 		int add_edge(int, int, int, int, int);
 		
 		int n();
@@ -31,13 +31,14 @@ class graph
 
 graph::graph() : _n(0), _m(0)
 {
-	add_vertex();	// source
-	add_vertex();	// sink
+	add_vertex(0);	// source
+	add_vertex(1);	// sink
 }
 
-int graph::add_vertex()
+int graph::add_vertex(int i)
 {
-	_vertices.push_back(vertex());
+	assert(vertices.size() == i);
+	_vertices.push_back(vertex(i));
 	_n++;
 	return _n - 1;
 }
