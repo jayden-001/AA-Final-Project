@@ -8,7 +8,7 @@ using namespace std;
 class graph
 {
 	private:
-		int v_num, m_num;
+		int v_num, e_num;
 		vertex source;
 		vertex sink;
 		vector<vertex> vertices;
@@ -26,14 +26,14 @@ class graph
 };
 
 graph::graph(vector<vertex> v, vector<edge> e) :
-	vertices(v), edges(e), n_num(v.size()), m_num(e.size())
+	vertices(v), edges(e), v_num(v.size()), e_num(e.size())
 {
-	source.set_h(n_num);
+	source.set_h(v_num);
 }
 
-int graph::n() { return n_num; }
+int graph::n() { return v_num; }
 
-int graph::m() { return m_num; }
+int graph::m() { return e_num; }
 
 vertex& graph::s() { return source; }
 
