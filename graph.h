@@ -1,3 +1,6 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include <cstdlib>
 #include <vector>
 #include "vertex.h"
@@ -9,8 +12,8 @@ class graph
 {
 	private:
 		int _n, _m;
-		vector<vertex> vertices;
-		vector<edge> edges;
+		vector<vertex> _vertices;
+		vector<edge> _edges;
 
 	public:
 		graph();
@@ -26,7 +29,7 @@ class graph
 		vector<edge>* e();
 };
 
-graph::graph() : _n(2), _m(0)
+graph::graph() : _n(0), _m(0)
 {
 	add_vertex();	// source
 	add_vertex();	// sink
@@ -34,7 +37,7 @@ graph::graph() : _n(2), _m(0)
 
 int graph::add_vertex()
 {
-	vertices.push_back(vertex());
+	_vertices.push_back(vertex());
 	_n++;
 	return _n - 1;
 }
@@ -45,7 +48,7 @@ int graph::add_edge(int v1, int v2, int upper12, int upper21, int cost = 0)
 	assert(v2 < n());
 	assert(upper12 >= 0);
 	assert(upper21 >= 0);
-	edges.push_back(edge(&(vertices[v1]), &(vertices[v2]), upper12, upper21, cost));
+	_edges.push_back(edge(&(_vertices[v1]), &(_vertices[v2]), upper12, upper21, cost));
 	_m++;
 	return _m - 1;
 }
@@ -54,10 +57,12 @@ int graph::n() { return _n; }
 
 int graph::m() { return _m; }
 
-vertex& graph::s() { return vertices[0]; }
+vertex& graph::s() { return _vertices[0]; }
 
-vertex& graph::t() { return vertices[1]; }
+vertex& graph::t() { return _vertices[1]; }
 
-vector<vertex>* graph::v() { return &vertices; }
+vector<vertex>* graph::v() { return &_vertices; }
 
-vector<edge>* graph::e() { return &edges; }
+vector<edge>* graph::e() { return &_edges; }
+
+#endif
