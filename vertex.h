@@ -55,8 +55,9 @@ void vertex::set_height(int i)
 edge* vertex::next_edge()
 {
 	int s = _edges.size();
+	_cur_edge++;
 	if (_cur_edge < s){
-		return _edges[_cur_edge++];
+		return _edges[_cur_edge];
 	}
 	else {
 		_cur_edge = 0;

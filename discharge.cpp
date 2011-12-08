@@ -90,12 +90,14 @@ void discharge(queue<vertex*>* Q)
 	vertex* v = Q->front();
 	Q->pop();
 	int h = v->height();
-	while (v->excess() != 0 && v->height() == h){
+	int i = 0;
+ 	while (v->excess() != 0 && v->height() == h){
+ 		cout << i++ << endl;
 		push_relabel(v);
 		vertex* w = v->cur_edge()->opposite(v);
 		if ( w->excess() > 0 )
 			Q->push(w);
-	}
+ 	}
 	if ( v->excess() > 0 )
 		Q->push(v);
 }
