@@ -24,6 +24,7 @@ class edge
 		edge(vertex*, vertex*, int, int, int);
 		int cost();
 		int flow();
+		int upper(vertex*);
 		int residue(vertex*);
 		void update_flow(vertex*, int);
 		vertex* v1();
@@ -46,6 +47,16 @@ vertex* edge::v1() { return _v1; }
 
 vertex* edge::v2() { return _v2; }
 
+int edge::upper(vertex* v)
+{
+	if (v == _v1)
+		return _upper12;
+	else {
+		assert(v == _v2);
+		return _upper21;
+	}	
+}
+
 int edge::residue(vertex* v)
 {
 	if (v == _v1)
@@ -65,6 +76,16 @@ void edge::update_flow(vertex* v, int i)
 		assert(v == _v2);
 		_flow -= i;
 	}
+}
+
+vertex* edge::opposite(vertex* v)
+{
+	if (v == _v1)
+		return _v2;
+	else {
+		assert(v == _v2);
+		return _v1;
+	}	
 }
 
 #endif

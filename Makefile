@@ -17,11 +17,11 @@ ALL = min_cost_flow
 
 all: $(ALL)
 
-obj/%.o: %.cpp $(HEADERS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+#obj/%.o: %.cpp $(HEADERS)
+#	$(CC) -c -o $@ $< $(CFLAGS)
 
-min_cost_flow: $(OBJS) $(HEADERS)
-	$(CC) -o $@ $(OBJS) $(LDFLAGS)
+min_cost_flow: $(SRC) $(HEADERS)
+	$(CC) -o $@ main.cpp $(LDFLAGS)
 
 clean:
 	rm -rf $(ALL) $(OBJS)

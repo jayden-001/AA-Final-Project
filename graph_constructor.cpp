@@ -78,19 +78,19 @@ graph* generateEasyGraph()
 	// creating
 	graph* g = new graph();
 	for (int i = 2; i < n; i++) {
-		g->add_vertex(i);
+		g->add_vertex();
 	}
 	for (int v1 = 0; v1 < n; v1++) {
 		for (int v2 = v1+1; v2 < n; v2++) {
 			cout << edges[v1*n + v2];
-			if (edges[v1*n + v2] != 0 && edges[v1*n + v2] != 0)
+			if (edges[v1*n + v2] != 0 || edges[v2*n + v1] != 0)
 				g->add_edge(v1,v2,edges[v1*n + v2],edges[v2*n + v1], 0);
 		}
 		cout << endl;
 	}
 	
-	cout << g->n() << endl;
-	cout << g->m() << endl;
+ 	cout << g->n() << endl;
+ 	cout << g->m() << endl;
 	
 	delete edges;
 	
@@ -102,11 +102,11 @@ graph* generateEasyGraph()
 graph* generate_trivial_graph()
 {
 	graph* g = new graph();
-	g->add_vertex(2);
-	g->add_vertex(3);
+	g->add_vertex();
+	g->add_vertex();
 
 	g->add_edge(0,2,1,0,0);
-	g->add_edge(0,2,1,0,0);
+	g->add_edge(0,3,1,0,0);
 	g->add_edge(2,3,1,1,0);
 	g->add_edge(3,1,1,0,0);
 	g->add_edge(2,1,1,0,0);

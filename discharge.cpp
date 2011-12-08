@@ -44,6 +44,7 @@ void push(vertex* v, edge *e)
 	vertex* w = e->opposite(v);
 	v->update_excess(-1*d);
 	w->update_excess(d);	
+
 }
 
 void relabel(vertex*v)
@@ -51,6 +52,7 @@ void relabel(vertex*v)
 	vector<edge*>* edges = v->edges();
 	int numOfEdges = edges->size();
 	int minHeight = INT_MAX;
+
 	 for( int i = 0; i <numOfEdges; i++){
                 edge* currentEdge = (*edges)[i];
                 vertex* w = currentEdge->opposite(v);
@@ -60,17 +62,6 @@ void relabel(vertex*v)
 
         }
 	
-	edge &currentEdge;
-	for (int i = 0; i <numOfEdges, i++){
-		currentEdge = edges->at(i);
-		vertex& w = *(currentEdge.opposite(v));
-		if ( currentEdge.residue(v) > 0 &&
-		     v.height() == w.height() + 1 )
-			push(v, currentEdge);
-		if (currentEdge.residue(v) > 0 && w.height()+1 < minHeight)
-			minHeight =  w.height()+1;
-		v.set_height(minHeight);
-	}
 }
 
 void push_relabel(vertex* v)
@@ -81,9 +72,10 @@ void push_relabel(vertex* v)
 	if (e == 0){
 		relabel(v);
 	}
-	else{
+	else if (e->residue(v) > 0 && v->height() == e->opposite(v)->height() + 1){
 		push(v, e);
-	}	
+	}
+	else;
 
 }
 
@@ -94,7 +86,7 @@ void discharge(queue<vertex*>* Q)
 	int h = v->height();
 	while (v->excess() != 0 && v->height() == h){
 		push_relabel(v);
-		vertex* w = currentEdge.opposite(v);
+		vertex* w = v->cur_edge()->opposite(v);
 		if ( w->excess() > 0 )
 			Q->push(w);
 	}

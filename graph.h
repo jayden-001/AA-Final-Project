@@ -1,6 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#include <iostream>
 #include <cstdlib>
 #include <vector>
 #include "vertex.h"
@@ -18,27 +19,27 @@ class graph
 	public:
 		graph();
 		
-		int add_vertex(int);
+		int add_vertex();
 		int add_edge(int, int, int, int, int);
+		void display();
 		
 		int n();
 		int m();
-		vertex& s();
-		vertex& t();
+		vertex* s();
+		vertex* t();
 		vector<vertex>* v();
 		vector<edge>* e();
 };
 
 graph::graph() : _n(0), _m(0)
 {
-	add_vertex(0);	// source
-	add_vertex(1);	// sink
+	add_vertex();	// source
+	add_vertex();	// sink
 }
 
-int graph::add_vertex(int i)
+int graph::add_vertex()
 {
-	assert(vertices.size() == i);
-	_vertices.push_back(vertex(i));
+	_vertices.push_back(vertex(_n));
 	_n++;
 	return _n - 1;
 }
@@ -54,13 +55,29 @@ int graph::add_edge(int v1, int v2, int upper12, int upper21, int cost = 0)
 	return _m - 1;
 }
 
+void graph::display()
+{
+	for (int i = 0; i < _m; i++) {
+		edge* e = &(_edges[i]);
+		int v1 = e->v1()->index();
+		int v2 = e->v2()->index();
+		
+		if (e->upper(e->v1()) != 0)
+			cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1()) << endl;
+		
+		if (e->upper(e->v2()) != 0)
+			cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) << endl;
+	}
+
+}
+
 int graph::n() { return _n; }
 
 int graph::m() { return _m; }
 
-vertex& graph::s() { return _vertices[0]; }
+vertex* graph::s() { return &_vertices[0]; }
 
-vertex& graph::t() { return _vertices[1]; }
+vertex* graph::t() { return &_vertices[1]; }
 
 vector<vertex>* graph::v() { return &_vertices; }
 
