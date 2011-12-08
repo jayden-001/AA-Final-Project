@@ -63,7 +63,7 @@ void vertex::update_excess(int i)
 	assert(_excess >= 0);
 }
 
-void vertex::curr_edge()
+edge* vertex::curr_edge()
 {
 	return _edges[_currEdge];
 }

@@ -59,11 +59,11 @@ void graph::display()
 {
 	for (int i = 0; i < _m; i++) {
 		edge* e = &(_edges[i]);
-		int v1 = e->v1()->index();
-		int v2 = e->v2()->index();
-		
-		cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1());
-		cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2());
+		// int v1 = e->v1()->index();
+// 		int v2 = e->v2()->index();
+// 		
+// 		cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1());
+// 		cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2());
 	}
 
 }

@@ -4,9 +4,11 @@
 #include "vertex.h"
 #include "edge.h"
 #include "graph_constructor.cpp"
+#include "sequential_maxflow.cpp"
 
 int main(int argc, char **argv)
 {
-  generateEasyGraph();
+  graph* g = generateEasyGraph();
+  sequential_maxflow(g);
   return 0;
 }
