@@ -9,9 +9,7 @@
 
 int main(int argc, char **argv)
 {
-  generateEasyGraph();
-	vertex v(5);
-  print("Index of v is");
-  print(v.index());
+  graph* g = generate_trivial_graph();
+  g->display();
   return 0;
 }
