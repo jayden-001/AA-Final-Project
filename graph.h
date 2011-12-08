@@ -21,7 +21,8 @@ class graph
 		
 		int add_vertex();
 		int add_edge(int, int, int, int, int);
-		void display();
+		void display_upper();
+		void display_flow();
 		
 		int n();
 		int m();
@@ -57,7 +58,23 @@ int graph::add_edge(int v1, int v2, int upper12, int upper21, int cost = 0)
 	return _m - 1;
 }
 
-void graph::display()
+void graph::display_upper()
+{
+	for (int i = 0; i < _m; i++) {
+		edge* e = _edges[i];
+		int v1 = e->v1()->index();
+		int v2 = e->v2()->index();
+
+		if (e->upper(e->v1()) != 0)
+			cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1()) <<  endl;
+		
+		if (e->upper(e->v2()) != 0)
+			cout << "*" << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) << endl;
+	}
+
+}
+
+void graph::display_flow()
 {
 	for (int i = 0; i < _m; i++) {
 		edge* e = _edges[i];

@@ -11,8 +11,8 @@
 int main(int argc, char **argv)
 {
   graph* g = generate_easy_graph();
-//   g->display();
+  g->display_upper();
   sequential_maxflow(g);
-  g->display();
+  g->display_flow();
   return 0;
 }
