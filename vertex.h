@@ -15,11 +15,10 @@ class vertex
 	private:
 		int _height;
 		int _excess;
-		vector<edge&> _edges;
+		vector<edge*> _edges;
 
 	public:
 		vertex();
-		~vertex();
 
 		int height();
 		void set_height(int); 
@@ -27,7 +26,7 @@ class vertex
 		int excess();
 		void adjust_excess(int);
 				
-		vector<edge&>& edges();
+		vector<edge*>* edges();
 };
 
 vertex::vertex() : _height(0), _excess(0)
@@ -49,6 +48,6 @@ void vertex::adjust_excess(int i)
 	assert(_excess >= 0);
 }
 
-vector<edge&>& vertex::edges() { return _edges; }
+vector<edge*>* vertex::edges() { return &_edges; }
 
 #endif
