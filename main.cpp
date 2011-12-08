@@ -11,8 +11,10 @@
 int main(int argc, char **argv)
 {
   graph* g = generate_easy_graph();
-  g->display_upper();
   sequential_maxflow(g);
-  g->display_flow();
+  if (g->is_valid_flow())
+	cout<<"flow is valid: "<<g->flow()<<endl;
+  else
+	cout<<"flow is invalid"<<endl;
   return 0;
 }
