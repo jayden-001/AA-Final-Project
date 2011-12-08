@@ -26,6 +26,8 @@ class vertex
 		
 		int excess();
 		void adjust_excess(int);
+		
+		edge* nextEdge();
 				
 		vector<edge*>* edges();
 };

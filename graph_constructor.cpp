@@ -89,8 +89,10 @@ graph* generateEasyGraph()
 		cout << endl;
 	}
 	
-	cout << g->n() << endl;
-	cout << g->m() << endl;
+	g->display();
+	
+// 	cout << g->n() << endl;
+// 	cout << g->m() << endl;
 	
 	delete edges;
 	
