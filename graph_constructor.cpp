@@ -83,16 +83,14 @@ graph* generateEasyGraph()
 	for (int v1 = 0; v1 < n; v1++) {
 		for (int v2 = v1+1; v2 < n; v2++) {
 			cout << edges[v1*n + v2];
-			if (edges[v1*n + v2] != 0 && edges[v1*n + v2] != 0)
+			if (edges[v1*n + v2] != 0 || edges[v2*n + v1] != 0)
 				g->add_edge(v1,v2,edges[v1*n + v2],edges[v2*n + v1], 0);
 		}
 		cout << endl;
 	}
 	
-	g->display();
-	
-// 	cout << g->n() << endl;
-// 	cout << g->m() << endl;
+ 	cout << g->n() << endl;
+ 	cout << g->m() << endl;
 	
 	delete edges;
 	
