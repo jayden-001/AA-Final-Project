@@ -1,26 +1,27 @@
-CC := icc
-CFLAGS := -Wall -g -O0 -DNDEBUG
-LDFLAGS := -lrt
+CC = icc
+CFLAGS = -Wall
+LDFLAGS = -lrt
 
 ifeq ($(DEBUG),1)
-	CFLAG := $(CFLAG) -DDEBUG -O0
+	CFLAGS = $(CFLAG) -O0 -DDEBUG
 else
-	CFLAG := $(CFLAG) -DNDEBUG -O3
+	CFLAGS = $(CFLAG) -g -O3 -DNDEBUG
 endif
 
-SRCS := main.cpp graph.cpp
-OBJS := $(SRCS: .cpp=.o)
+ODIR = obj
+SRCS = main.cpp
+HEADERS = graph.h vertex.h edge.h
+_OBJ = $(SRCS:.cpp=.o)
+OBJS = $(patsubst %,$(ODIR)/%,$(_OBJ))
+ALL = min_cost_flow
 
-all: min_cost_flow
+all: $(ALL)
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) -c main.cpp
-	
-graph.o: graph.h
-	$(CC) $(CFLAGS) -c graph.h
+obj/%.o: %.cpp $(HEADERS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-min_cost_flow: main.o graph.o
-	$(CC) -o $(all) main.o graph.o $(LDFLAGS)
+min_cost_flow: $(OBJS) $(HEADERS)
+	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
 clean:
-	rm -r min_cost_flow *.o
+	rm -rf $(ALL) $(OBJS)
