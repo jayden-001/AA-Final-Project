@@ -8,37 +8,56 @@ using namespace std;
 class graph
 {
 	private:
-		int v_num, e_num;
-		vertex source;
-		vertex sink;
+		int _n, _m;
 		vector<vertex> vertices;
 		vector<edge> edges;
 
 	public:
-		graph(vector<vertex>&, vector<edge>&);
-		~graph();
+		graph();
+		
+		int add_vertex();
+		int add_edge(int, int, int, int, int);
+		
 		int n();
 		int m();
 		vertex& s();
 		vertex& t();
-		vector<vertex>& v();
-		vector<edge>& e();
+		vector<vertex>* v();
+		vector<edge>* e();
 };
 
-graph::graph(vector<vertex> v, vector<edge> e) :
-	vertices(v), edges(e), v_num(v.size()), e_num(e.size())
+graph::graph() : _n(2), _m(0)
 {
-	source.set_h(v_num);
+	add_vertex();	// source
+	add_vertex();	// sink
 }
 
-int graph::n() { return v_num; }
+int graph::add_vertex()
+{
+	vertices.push_back(vertex());
+	_n++;
+	return _n - 1;
+}
 
-int graph::m() { return e_num; }
+int graph::add_edge(int v1, int v2, int upper12, int upper21, int cost = 0)
+{
+	assert(v1 < n());
+	assert(v2 < n());
+	assert(upper12 >= 0);
+	assert(upper21 >= 0);
+	edges.push_back(edge(&(vertices[v1]), &(vertices[v2]), upper12, upper21, cost));
+	_m++;
+	return _m - 1;
+}
 
-vertex& graph::s() { return source; }
+int graph::n() { return _n; }
 
-vertex& graph::t() { return sink; }
+int graph::m() { return _m; }
 
-vector<vertex>& graph::v() { return vertices; }
+vertex& graph::s() { return vertices[0]; }
 
-vector<vertex>& graph::e() { return edges; }
+vertex& graph::t() { return vertices[1]; }
+
+vector<vertex>* graph::v() { return &vertices; }
+
+vector<edge>* graph::e() { return &edges; }

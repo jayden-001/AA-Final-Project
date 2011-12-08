@@ -1,6 +1,10 @@
+#ifndef EDGE_H
+#define EDGE_H
+
 #include <cstdlib>
 #include <cassert>
 #include <iostream>
+#include "vertex.h"
 
 using namespace std;
 
@@ -9,45 +13,58 @@ class vertex;
 class edge
 {
 	private:
-		int cost;
-		int upper1; //capacity
-		int upper2; //capacity
-		int flow;
-		int residue;
-		vertex v1, v2;
+		int _cost;
+		int _upper12; //capacity
+		int _upper21; //capacity
+		int _flow;
+		vertex* _v1;
+		vertex* _v2;
 
 	public:
-		edge(vertex&, vertex&, int);
-		~edge();
-		int c();
-		int f();
-		int rf();
-		void adjust_rf(int);
-		vertex& v1();
-		vertex& v2();
-		void set_rev();
+		edge(vertex*, vertex*, int, int, int);
+		int cost();
+		int flow();
+		int residue(vertex*);
+		void update_flow(vertex*, int);
+		vertex* v1();
+		vertex* v2();
+		vertex* opposite(vertex* v);
 };
 
-edge::edge(vertex& v1, vertex& v2, int c = 0) :
-	from(v1), to(v2), cost(c), residue(c)
-{}
-
-int edge::c() { return cost; }
-
-int edge::f() { return flow; }
-
-int edge::rf() { return residue; }
-
-void edge::adjust_rf(int i)
+edge::edge(vertex* v1, vertex* v2, int upper12 = 0, int upper21 = 0, int c = 0) :
+	_v1(v1), _v2(v2), _cost(c), _flow(0), _upper12(upper12), _upper21(upper21)
 {
-	residue += i;
-	assert(residue <= cost || residue <= reverse.c());
+	v1->edges()->push_back(this);
+	v2->edges()->push_back(this);
 }
 
-vertex& edge::v1() { return from; }
+int edge::cost() { return _cost; }
 
-vertex& edge::v2() { return to; }
+int edge::flow() { return _flow; }
 
-edge& rev() { return *reverse; }
+vertex* edge::v1() { return _v1; }
 
-void set_reverse(edge& e) { reverse = &e; }
+vertex* edge::v2() { return _v2; }
+
+int edge::residue(vertex* v)
+{
+	if (v == _v1)
+		return _upper12 - _flow;
+	else {
+		assert(v == _v2);
+		return _flow;
+	}	
+}
+
+void edge::update_flow(vertex* v, int i)
+{
+	assert(i > 0);
+	if (v == _v1)
+		_flow += i;
+	else {
+		assert(v == _v2);
+		_flow -= i;
+	}
+}
+
+#endif
