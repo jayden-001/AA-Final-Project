@@ -11,7 +11,7 @@
 
 int main(int argc, char **argv)
 {
-  graph* g = generateEasyGraph();
+  graph* g = generate_trivial_graph();
   g->display();
   parallel_solver solver(g);
   sequential_maxflow(g);

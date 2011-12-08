@@ -13,11 +13,11 @@ vector<int> excess_tmp;
 
 void pulse(graph &g)
 {
-	vector<vertex>* vertices = g.v();
+	vector<vertex*>* vertices = g.v();
 	vector<edge*>* edges;
 	int d;
 	cilk_for (int i = 2; i < g.v()->size(); ++i) {
-		vertex *v = &vertices->at(i);
+		vertex *v = vertices->at(i);
 		edges = v->edges();
 		cilk_for (int j = 0; j < edges->size(); ++j) {
 			if (v->excess() > 0) {
@@ -72,9 +72,10 @@ void push_relabel(vertex* v)
 	if (e == 0){
 		relabel(v);
 	}
-	else{
+	else if (e->residue(v) > 0 && v->height() == e->opposite(v)->height() + 1){
 		push(v, e);
-	}	
+	}
+	else;
 
 }
 
