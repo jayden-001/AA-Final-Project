@@ -43,7 +43,7 @@ void push(vertex* v, edge *e)
 	int d = min(v->excess(), e->residue(v));
 	e->update_flow(v, d);
 	vertex* w = e->opposite(v);
-	v->update_excess(-1*d);
+	v->update_excess(-d);
 	w->update_excess(d);	
 
 }
@@ -85,17 +85,17 @@ void push_relabel(vertex* v)
 
 }
 
-void discharge(queue<vertex*>* Q)
+void discharge(queue<vertex*>* Q, vertex* source, vertex* sink)
 {
 	vertex* v = Q->front();
 	Q->pop();
 	int h = v->height();
 	int i = 0;
  	while (v->excess() != 0 && v->height() == h){
- 		cout << i++ << endl;
+ 		//cout << v->excess() << endl;
 		push_relabel(v);
 		vertex* w = v->cur_edge()->opposite(v);
-		if ( w->excess() > 0 )
+		if ( w->excess() > 0 && w != source && w!= sink )
 			Q->push(w);
  	}
 	if ( v->excess() > 0 )

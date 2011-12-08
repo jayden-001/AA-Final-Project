@@ -29,6 +29,6 @@ void sequential_maxflow(graph* g)
 	
 	// loop
 	while (Q.size() != 0) {
-		discharge(&Q);
+		discharge(&Q, g->s(), g->t());
 	}
 }

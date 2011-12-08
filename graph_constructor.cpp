@@ -6,7 +6,7 @@
 
 using namespace std;
 
-graph* generateEasyGraph()
+graph* generate_easy_graph()
 {
 	
 	ifstream reader;
@@ -105,11 +105,11 @@ graph* generate_trivial_graph()
 	g->add_vertex();
 	g->add_vertex();
 
-	g->add_edge(0,2,1,0,0);
+	g->add_edge(0,2,5,0,0);
 	g->add_edge(0,3,1,0,0);
-	g->add_edge(2,3,1,1,0);
-	g->add_edge(3,1,1,0,0);
-	g->add_edge(2,1,1,0,0);
+	g->add_edge(2,3,2,3,0);
+	g->add_edge(3,1,5,0,0);
+	g->add_edge(2,1,2,0,0);
 
 	return g;
 }
