@@ -1,3 +1,6 @@
+#ifndef DISCHARGE
+#define DISCHARGE
+
 #include <cstdlib>
 #include <cassert>
 #include <iostream>
@@ -8,31 +11,6 @@
 #include "limits.h"
 
 using namespace std;
-
-vector<int> excess_tmp;
-
-void pulse(graph &g)
-{
-	vector<vertex*>* vertices = g.v();
-	vector<edge*>* edges;
-	int d;
-	cilk_for (int i = 2; i < g.v()->size(); ++i) {
-		vertex *v = vertices->at(i);
-		edges = v->edges();
-		cilk_for (int j = 0; j < edges->size(); ++j) {
-			if (v->excess() > 0) {
-				edge *e = edges->at(j);
-				if (e->residue(v) > 0 &&
-					v->height() == e->opposite(v)->height()+1)
-				{
-					d = min(v->excess(), e->residue(v));
-					v->update_excess(-d);
-					e->update_flow(v, d);
-				}
-			}
-		}
-	}			
-}
 
 void push(vertex* v, edge *e)
 {
@@ -101,3 +79,5 @@ void discharge(queue<vertex*>* Q, vertex* source, vertex* sink)
 	if ( v->excess() > 0 )
 		Q->push(v);
 }
+
+#endif

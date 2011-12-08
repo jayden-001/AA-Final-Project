@@ -3,13 +3,13 @@ CFLAGS = -Wall
 LDFLAGS = -lrt
 
 ifeq ($(DEBUG),1)
-	CFLAGS = $(CFLAG) -O0 -DDEBUG
+	CFLAGS := $(CFLAGS) -g -O0 -DDEBUG
 else
-	CFLAGS = $(CFLAG) -g -O3 -DNDEBUG
+	CFLAGS := $(CFLAGS) -O3 -DNDEBUG
 endif
 
 ODIR = obj
-SRCS = main.cpp discharge.cpp
+SRCS = main.cpp discharge.cpp parallel_maxflow.cpp
 HEADERS = graph.h vertex.h edge.h
 _OBJ = $(SRCS:.cpp=.o)
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJ))
@@ -20,8 +20,8 @@ all: $(ALL)
 #obj/%.o: %.cpp $(HEADERS)
 #	$(CC) -c -o $@ $< $(CFLAGS)
 
-min_cost_flow: $(SRC) $(HEADERS)
-	$(CC) -o $@ main.cpp $(LDFLAGS)
+min_cost_flow: $(SRCS) $(HEADERS)
+	$(CC) -o $@ main.cpp $(LDFLAGS) $(CFLAGS)
 
 clean:
 	rm -rf $(ALL) $(OBJS)
