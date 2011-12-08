@@ -9,7 +9,6 @@ using namespace std;
 
 graph* generate_easy_graph(const char* graph_file)
 {
-	//cout << graph_file << endl;	
 	ifstream reader;
 	reader.open(graph_file);
 	
@@ -41,9 +40,6 @@ graph* generate_easy_graph(const char* graph_file)
 				case 1:
 					state = 0;
 					istringstream(string(buffer)) >> n; 
-					if (n > 1) {
-						cout << n << endl;
-					}
 					break;
 				case 2:
 					state = 3;
@@ -82,7 +78,6 @@ graph* generate_easy_graph(const char* graph_file)
 	for (int i = 2; i < n; i++) {
 		g->add_vertex();
 	}
-	cout << g->n() << endl;
 	
 	map<long long,int>::iterator iter;   
 	for( iter = costmap.begin(); iter != costmap.end(); iter++ ) {

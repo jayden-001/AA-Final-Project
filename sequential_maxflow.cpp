@@ -12,7 +12,6 @@ void sequential_maxflow(graph* g)
 	
 	// initialize preflow
 	vector<edge*>* edges = s->edges();
-	cout << edges->size() << endl;
 	for (int i = 0; i < edges->size(); i++) {
 		edge* e = edges->at(i);
 		
