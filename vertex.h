@@ -15,6 +15,7 @@ class vertex
 	private:
 		int _height;
 		int _excess;
+		int _currEdge;
 		vector<edge*> _edges;
 
 	public:
@@ -29,7 +30,7 @@ class vertex
 		vector<edge*>* edges();
 };
 
-vertex::vertex() : _height(0), _excess(0)
+vertex::vertex() : _height(0), _excess(0), _currEdge(0)
 {}
 
 int vertex::height() { return _height; }
@@ -38,6 +39,18 @@ void vertex::set_height(int i)
 {
 	assert(i >= 0);
 	_height = i;
+}
+
+edge* vertex::nextEdge()
+{
+	int s = _edges.size();
+	if (_currEdge < s){
+		return _edges[_currEdge++];
+	}
+	else {
+		_currEdge = 0;
+		return 0;
+	}
 }
 
 int vertex::excess() { return _excess; }
