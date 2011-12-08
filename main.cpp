@@ -1,17 +1,12 @@
-#include <cstdlib>
 #include <iostream>
 #include <assert.h>
 #include "graph.h"
 #include "vertex.h"
 #include "edge.h"
-
-#define print(x) std::cout << x << std::endl;
+#include "graph_constructor.cpp"
 
 int main(int argc, char **argv)
 {
-	vertex v;
-	v.set_height(5);
-  print("Height of v is");
-  print(v.height());
+  generateEasyGraph();
   return 0;
 }
