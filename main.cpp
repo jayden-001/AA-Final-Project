@@ -6,6 +6,8 @@
 #include "graph_constructor.cpp"
 #include "sequential_maxflow.cpp"
 
+#define print(x) std::cout << x << std::endl
+
 int main(int argc, char **argv)
 {
   graph* g = generateEasyGraph();

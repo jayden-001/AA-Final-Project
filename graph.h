@@ -25,8 +25,8 @@ class graph
 		
 		int n();
 		int m();
-		vertex& s();
-		vertex& t();
+		vertex* s();
+		vertex* t();
 		vector<vertex>* v();
 		vector<edge>* e();
 };
@@ -72,9 +72,9 @@ int graph::n() { return _n; }
 
 int graph::m() { return _m; }
 
-vertex& graph::s() { return _vertices[0]; }
+vertex* graph::s() { return _vertices[0]; }
 
-vertex& graph::t() { return _vertices[1]; }
+vertex* graph::t() { return _vertices[1]; }
 
 vector<vertex>* graph::v() { return &_vertices; }
 
