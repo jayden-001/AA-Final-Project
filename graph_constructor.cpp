@@ -6,11 +6,11 @@
 
 using namespace std;
 
-graph* generate_easy_graph()
+graph* generate_easy_graph(const char* graph_file)
 {
-	
+	//cout << graph_file << endl;	
 	ifstream reader;
-	reader.open("easy.graph");
+	reader.open(graph_file);
 	
 	bool started = false;
 	int state = 0;
