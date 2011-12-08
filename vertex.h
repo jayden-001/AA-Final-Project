@@ -1,6 +1,10 @@
+#ifndef VERTEX_H
+#define VERTEX_H
+
 #include <cstdlib>
 #include <cassert>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -9,48 +13,42 @@ class edge;
 class vertex
 {
 	private:
-		int height;
-		int excess;
-		int name;
-		vector<edge> outgoing;
-		vector<edge> ingoing;
+		int _height;
+		int _excess;
+		vector<edge&> _edges;
 
 	public:
 		vertex();
 		~vertex();
 
-		int h();
-		void set_h(int); 
+		int height();
+		void set_height(int); 
 		
-		int e();
-		void adjust_e(int);
-		
-		int	name();
-		
-		vector<edge> out();
-		vector<edge> in();
+		int excess();
+		void adjust_excess(int);
+				
+		vector<edge&>& edges();
 };
 
-int vertex::h() { return height; }
+vertex::vertex() : _height(0), _excess(0)
+{}
 
-void vertex::set_h(int i)
+int vertex::height() { return _height; }
+
+void vertex::set_height(int i)
 {
 	assert(i >= 0);
-	height = i;
+	_height = i;
 }
 
-int vertex::e() { return excess; }
+int vertex::excess() { return _excess; }
 
-void vertex::adjust_e(int i)
+void vertex::adjust_excess(int i)
 {
-	excess += i;
-	assert(excess >= 0);
+	_excess += i;
+	assert(_excess >= 0);
 }
 
-int vertex::name() { return name; }
+vector<edge&>& vertex::edges() { return _edges; }
 
-vector<edger>& vertex::out() { return outgoing; }
-
-vector<edger>& vertex::in() { return ingoing; }
-
-
+#endif
