@@ -78,4 +78,14 @@ void edge::update_flow(vertex* v, int i)
 	}
 }
 
+vertex* edge::opposite(vertex* v)
+{
+	if (v == _v1)
+		return _v2;
+	else {
+		assert(v == _v2);
+		return _v1;
+	}	
+}
+
 #endif

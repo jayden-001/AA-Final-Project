@@ -9,7 +9,7 @@ else
 endif
 
 ODIR = obj
-SRCS = main.cpp discharge.cpp sequential_maxflow.cpp
+SRCS = main.cpp discharge.cpp
 HEADERS = graph.h vertex.h edge.h
 _OBJ = $(SRCS:.cpp=.o)
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJ))

@@ -40,6 +40,11 @@ vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0)
 
 int vertex::height() { return _height; }
 
+int vertex::index()
+{
+	return _index;
+}
+
 void vertex::set_height(int i)
 {
 	assert(i >= 0);
