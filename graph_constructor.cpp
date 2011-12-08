@@ -11,7 +11,7 @@ graph* generate_easy_graph()
 {
 	
 	ifstream reader;
-	reader.open("easy.graph");
+	reader.open("easy20_20.graph");
 	
 	bool started = false;
 	int state = 0;
