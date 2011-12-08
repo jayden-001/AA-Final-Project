@@ -9,7 +9,7 @@ else
 endif
 
 ODIR = obj
-SRCS = main.cpp
+SRCS = main.cpp push_realbel_discharge.cpp
 HEADERS = graph.h vertex.h edge.h
 _OBJ = $(SRCS:.cpp=.o)
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJ))
