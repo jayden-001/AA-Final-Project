@@ -10,7 +10,7 @@ graph* generate_easy_graph()
 {
 	
 	ifstream reader;
-	reader.open("easy.graph");
+	reader.open("easier.graph");
 	
 	bool started = false;
 	int state = 0;

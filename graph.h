@@ -64,11 +64,17 @@ void graph::display()
 		int v1 = e->v1()->index();
 		int v2 = e->v2()->index();
 		
-		if (e->upper(e->v1()) != 0)
+		if (e->flow() > 0)
 			cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1()) <<","<< e->flow() <<  endl;
 		
-		if (e->upper(e->v2()) != 0)
-			cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) <<","<< e->flow() << endl;
+		if (e->flow() < 0)
+			cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) <<","<< -(e->flow()) << endl;
+		
+// 		if (e->upper(e->v1()) != 0)
+// 			cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1()) <<","<< e->flow() <<  endl;
+// 		
+// 		if (e->upper(e->v2()) != 0)
+// 			cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) <<","<< e->flow() << endl;
 	}
 
 }
