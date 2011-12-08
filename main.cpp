@@ -12,18 +12,14 @@
 
 int main(int argc, char **argv)
 {
-//  cilk::reducer_opadd<int> r;
-//  r += 10;
-//  print("reducer value: ");
-//  print(r.get_value());
   graph* g = generate_easy_graph();
-//   g->display();
-  print("solving parallel...");
-  parallel_solver solver(g);
-  g->display();
-//  g = generate_easy_graph();
-//  print("solving sequential...");
-//  sequential_maxflow(g);
+//  print("solving parallel...");
+//  parallel_solver solver(g);
+//  solver.solve_maxflow();
 //  g->display();
+//  g = generate_easy_graph();
+  print("solving sequential...");
+  sequential_maxflow(g);
+  g->display();
   return 0;
 }
