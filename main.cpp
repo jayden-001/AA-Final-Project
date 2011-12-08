@@ -10,7 +10,7 @@
 
 int main(int argc, char **argv)
 {
-  graph* g = generateEasyGraph();
+  graph* g = generate_trivial_graph();
   g->display();
   sequential_maxflow(g);
   return 0;

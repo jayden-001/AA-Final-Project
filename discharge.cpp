@@ -72,10 +72,10 @@ void push_relabel(vertex* v)
 	if (e == 0){
 		relabel(v);
 	}
-	else{
-		if (v->height() == e->opposite(v)->height() + 1)
-			push(v, e);
-	}	
+	else if (e->residue(v) > 0 && v->height() == e->opposite(v)->height() + 1){
+		push(v, e);
+	}
+	else;
 
 }
 
