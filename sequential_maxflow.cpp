@@ -8,7 +8,7 @@ void sequential_maxflow(graph* g)
 {
 	vertex* s = g->s();
 	vertex* t = g->t();
-	queue<vertex*> Q;
+	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
 	
 	// initialize preflow
 	vector<edge*>* edges = s->edges();

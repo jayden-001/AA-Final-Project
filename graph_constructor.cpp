@@ -118,3 +118,19 @@ graph* generate_trivial_graph()
 
 	return g;
 }
+
+graph* generate_complete_graph(int graph_size)
+{
+	graph* g = new graph();
+	// add vertecise
+	for (int i = 0; i < graph_size; i++){
+		g->add_vertex();
+	}
+	// add edges
+	for (int i = 0; i < graph_size; i++){
+		for (int j = i+1; j < graph_size; j++){
+			g->add_edge(i,j,rand()%1000,rand()%1000,0 );
+		}
+	}
+	return g;
+}

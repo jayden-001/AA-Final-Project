@@ -63,9 +63,10 @@ void push_relabel(vertex* v)
 
 }
 
-void discharge(queue<vertex*>* Q, vertex* source, vertex* sink)
+void discharge(priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q, 
+	       vertex* source, vertex* sink)
 {
-	vertex* v = Q->front();
+	vertex* v = Q->top();
 	Q->pop();
 	int h = v->height();
 	int i = 0;

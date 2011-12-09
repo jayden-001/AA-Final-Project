@@ -106,7 +106,12 @@ bool graph::is_valid_flow()
 
 int graph::flow()
 {
-	return _vertices[1]->excess();
+	int flow = 0;
+	int n_outgoing_edges = _vertices[0]->edges()->size();
+	for (int i = 0; i < n_outgoing_edges; i++){
+		flow += _vertices[0]->edges()->at(i)->flow();
+	}
+	return flow;
 }
 
 int graph::n() { return _n; }

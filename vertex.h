@@ -85,4 +85,13 @@ bool vertex::is_last()
 
 vector<edge*>* vertex::edges() { return &_edges; }
 
+class CompareVertex {
+        public:
+                bool operator()( vertex* v1, vertex* v2 )
+                {
+                        return v1->height() >= v2->height();
+                }
+};
+
+
 #endif
