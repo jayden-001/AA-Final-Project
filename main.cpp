@@ -20,7 +20,7 @@ int main(int argc, char **argv)
   graph* g = generate_easy_graph(argv[1]);
   parallel(g);
   g = generate_easy_graph(argv[1]);
-  sequential_maxflow(g);
+  sequential(g);
   return 0;
 }
 
@@ -49,7 +49,7 @@ int sequential(graph *g)
 
 void result(graph *g, clock_t start, clock_t end)
 {
-  g->display_flow();
+////  g->display_flow();
   if (g->is_valid_flow())
 		cout<<"flow is valid: "<<g->flow()<<endl;
   else
