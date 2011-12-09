@@ -63,6 +63,22 @@ void push_relabel(vertex* v)
 
 }
 
+void discharge(queue<vertex*>* Q, vertex* source, vertex* sink)
+{
+	vertex* v = Q->front();
+	Q->pop();
+	int h = v->height();
+	int i = 0;
+ 	while (v->excess() != 0 && v->height() == h){
+		push_relabel(v);
+		vertex* w = v->cur_edge()->opposite(v);
+		if ( w->excess() > 0 && w != source && w!= sink )
+			Q->push(w);
+ 	}
+	if ( v->excess() > 0 )
+		Q->push(v);
+}
+
 void discharge(priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q, 
 	       vertex* source, vertex* sink)
 {

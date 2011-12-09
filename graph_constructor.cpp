@@ -122,15 +122,39 @@ graph* generate_trivial_graph()
 graph* generate_complete_graph(int graph_size)
 {
 	graph* g = new graph();
-	// add vertecise
-	for (int i = 0; i < graph_size; i++){
+	// add vertices
+	for (int i = 2; i < graph_size; i++){
 		g->add_vertex();
 	}
 	// add edges
 	for (int i = 0; i < graph_size; i++){
 		for (int j = i+1; j < graph_size; j++){
-			g->add_edge(i,j,rand()%1000,rand()%1000,0 );
+			g->add_edge(i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
 		}
 	}
 	return g;
+}
+
+graph* generate_dumbbell_graph(int graph_size)
+{
+	graph* g = new graph();
+	// add vertices
+	for (int i = 2; i < graph_size*2; i++){
+		g->add_vertex();
+	}
+	
+	// add edges
+	for (int i = 0; i < graph_size; i++){
+		for (int j = i+1; j < graph_size; j++){
+			g->add_edge(i==0 ? 0 : i+1, j+1, rand()%1000 + 1,rand()%1000 + 1,0 );
+		}
+	}
+	for (int i = graph_size; i < graph_size*2; i++){
+		for (int j = i+1; j < graph_size*2; j++){
+			g->add_edge(i==graph_size ? 1 : i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
+		}
+	}
+	g->add_edge(2, graph_size*2-1, 10, 0, 0);
+	return g;
+	
 }
