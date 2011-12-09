@@ -48,11 +48,10 @@ int parallel_solver::solve_maxflow()
 		if (e->opposite(s)->excess() > 0)
 			++active;
 	}
-	g->display_flow();
 	assert(active.get_value() == s_adj->size());
 	int counter = 0;
 	while (active.get_value() > 0) {
-		print("count: " << counter << " active: " << active.get_value());
+//		print("count: " << counter << " active: " << active.get_value());
 		pulse();
 		counter++;
 	}
@@ -62,7 +61,6 @@ int parallel_solver::solve_maxflow()
 void parallel_solver::pulse()
 {
 	active -= active.get_value();
-//	vector<vertex*>* vertices = g->v();
 	vector<edge*>* edges;
 	vertex *v;
 	cilk_for (int i = 2; i < vertices->size(); ++i) {
