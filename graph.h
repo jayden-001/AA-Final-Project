@@ -23,7 +23,8 @@ class graph
 		int add_edge(int, int, int, int, int);
 		void display_upper();
 		void display_flow();
-		
+		bool is_valid_flow();
+		int flow();
 		int n();
 		int m();
 		vertex* s();
@@ -47,13 +48,11 @@ int graph::add_vertex()
 
 int graph::add_edge(int v1, int v2, int upper12, int upper21, int cost = 0)
 {
-	assert(v1 < n());
-	assert(v2 < n());
+	assert(v1 < n() && v1 >= 0);
+	assert(v2 < n() && v2 >= 0);
 	assert(upper12 >= 0);
 	assert(upper21 >= 0);
 	_edges.push_back(new edge(_vertices[v1], _vertices[v2], upper12, upper21, cost));
-// 	_vertices[v1]->edges()->push_back(_edges[_m]);
-// 	_vertices[v2]->edges()->push_back(_edges[_m]);
 	_m++;
 	return _m - 1;
 }
@@ -94,6 +93,20 @@ void graph::display_flow()
 // 			cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) <<","<< e->flow() << endl;
 	}
 
+}
+
+bool graph::is_valid_flow()
+{
+	for (int i = 2; i < _n; i++){
+		if ( _vertices[i]->excess() != 0)
+			return false;	
+	}
+	return true;
+}
+
+int graph::flow()
+{
+	return _vertices[1]->excess();
 }
 
 int graph::n() { return _n; }

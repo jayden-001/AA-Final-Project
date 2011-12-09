@@ -7,20 +7,24 @@
 #include "sequential_maxflow.cpp"
 #include "parallel_maxflow.cpp"
 #include <cilk/reducer_opadd.h>
+#include <time.h>
 
 #define print(x) std::cout << x << std::endl
 
 int main(int argc, char **argv)
 {
-  graph* g = generate_easy_graph();
-//  print("solving parallel...");
-//  parallel_solver solver(g);
-//  solver.solve_maxflow();
-//  g->display();
-//  g = generate_easy_graph();
+  clock_t start,end;
+  graph* g = generate_easy_graph(argv[1]);
+//   g->display_upper();
   print("solving sequential...");
-  g->display_upper();
+  start = clock();
   sequential_maxflow(g);
-  g->display_flow();
+  end = clock();
+  if (g->is_valid_flow())
+	cout<<"flow is valid: "<<g->flow()<<endl;
+  else
+	cout<<"flow is invalid"<<endl;
+  cout << ((double) (end - start)) / CLOCKS_PER_SEC
+        << " seconds in total" << endl;
   return 0;
 }

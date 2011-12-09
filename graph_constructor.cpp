@@ -2,23 +2,23 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <map>
 #include "graph.h"
 
 using namespace std;
 
-graph* generate_easy_graph()
+graph* generate_easy_graph(const char* graph_file)
 {
-	
 	ifstream reader;
-	reader.open("easy.graph");
+	reader.open(graph_file);
 	
 	bool started = false;
 	int state = 0;
 	int n = 0;
-	int v1 = 0;
-	int v2 = 0;
+	long long v1 = 0;
+	long long v2 = 0;
 	
-	int* edges;
+	map <long long, int> costmap;
 	
 	// parsing
 	char buffer[100];
@@ -40,10 +40,6 @@ graph* generate_easy_graph()
 				case 1:
 					state = 0;
 					istringstream(string(buffer)) >> n; 
-					if (n > 1) {
-						edges = new int[n*n];
-						cout << n << endl;
-					}
 					break;
 				case 2:
 					state = 3;
@@ -67,7 +63,9 @@ graph* generate_easy_graph()
 					state = 0;
 					int c;
 					istringstream(string(buffer)) >> c;
-					edges[v1*n + v2] = c;
+					long long index = v1*n + v2;
+					assert(index >= 0);
+					costmap[index] = c;
 				}
 			}
 
@@ -80,20 +78,27 @@ graph* generate_easy_graph()
 	for (int i = 2; i < n; i++) {
 		g->add_vertex();
 	}
-	for (int v1 = 0; v1 < n; v1++) {
-		for (int v2 = v1+1; v2 < n; v2++) {
-			cout << edges[v1*n + v2];
-			if (edges[v1*n + v2] != 0 || edges[v2*n + v1] != 0)
-				g->add_edge(v1,v2,edges[v1*n + v2],edges[v2*n + v1], 0);
-		}
-		cout << endl;
+	
+	map<long long,int>::iterator iter;   
+	for( iter = costmap.begin(); iter != costmap.end(); iter++ ) {
+		long long index = iter->first;
+		long long v1 = index / n;
+		long long v2 = index % n;
+		assert (index >= 0);
+		assert (v1 < n && v1 >= 0);
+		assert (v2 < n && v2 >= 0);
+		
+		int upper12 = costmap.count(v1*n+v2) == 0 ? 0 : costmap[v1*n + v2];
+		int upper21 = costmap.count(v2*n+v1) == 0 ? 0 : costmap[v2*n + v1];
+		if (v1 >= v2 && upper21!=0)	continue;
+		g->add_edge(v1,v2,upper12,upper21,0);
+		
 	}
 	
- 	cout << g->n() << endl;
- 	cout << g->m() << endl;
-	
-	delete edges;
-	
+ 	cout << "n=" << g->n() << endl;
+ 	cout << "m=" << g->m() << endl;
+ 	cout << "Done generating easy graph!" << endl;
+		
 	return g;
 	
 }
