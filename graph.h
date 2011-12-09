@@ -97,6 +97,7 @@ void graph::display_flow()
 
 bool graph::is_valid_flow()
 {
+	bool flag = true;
 	for (int i = 2; i < _n; i++){
 		int excess = 0;
         	int n_outgoing_edges = _vertices[i]->edges()->size();
@@ -107,7 +108,7 @@ bool graph::is_valid_flow()
         	}
 		if (excess != 0){
 			cout << "flow is not conserved at vertex: " << i << " excess: " << excess << endl;
-			return false;
+			flag = false;
 		}
 	
 	}
@@ -118,16 +119,16 @@ bool graph::is_valid_flow()
 		if (  e->flow(v1) > e->upper(v1) ){
                 	cout << "flow exceeds upper bound from vertex: " << v1->index() << " to vertex: " << v2->index()
                         <<  " flow: " << e->flow(v1) << " upper: " <<  e->upper(v1) << endl;
-			return false;
+			flag = false;
                 }
 		else if (e->flow(v2) > e->upper(v2)){
 			cout << "flow exceeds upper bound from vertex: " << v2->index() << " to vertex: " << v1->index() 
 			<<  " flow: " << e->flow(v2) << " upper: " <<  e->upper(v2) << endl;
-                        return false;
+                        flag = false;
 		}
 	}
 
-	return true;
+	return flag;
 }
 
 int graph::flow()
