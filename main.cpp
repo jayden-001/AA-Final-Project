@@ -19,8 +19,9 @@ int main(int argc, char **argv)
 {
   graph* g = generate_easy_graph(argv[1]);
   parallel(g);
+  delete g;
   g = generate_easy_graph(argv[1]);
-  sequential_maxflow(g);
+  sequential(g);
   return 0;
 }
 
