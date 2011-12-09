@@ -17,10 +17,15 @@ int sequential(graph*);
 
 int main(int argc, char **argv)
 {
-  graph* g = generate_easy_graph(argv[1]);
+//   graph* g = generate_easy_graph(argv[1]);
+  srand(1);
+  graph* g = generate_dumbbell_graph(10);
   parallel(g);
+//  g = generate_easy_graph(argv[1]);
   delete g;
-  g = generate_easy_graph(argv[1]);
+  srand(1);
+  g = generate_dumbbell_graph(10);
+//   g = generate_easy_graph(argv[1]);
   sequential(g);
   return 0;
 }
@@ -50,7 +55,7 @@ int sequential(graph *g)
 
 void result(graph *g, clock_t start, clock_t end)
 {
-  g->display_flow();
+//   g->display_flow();
   if (g->is_valid_flow())
 		cout<<"flow is valid: "<<g->flow()<<endl;
   else
