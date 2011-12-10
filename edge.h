@@ -17,9 +17,10 @@ class edge
 		int _residue;
 		edge* _reverse;
 		vertex* _v;
+		vertex* _v_op;
 	public:
 		edge();
-		void set_edge(vertex* v, int upper, edge* reverse);
+		void set_edge(vertex* v, vertex* _v_op, int upper, edge* reverse);
 		
 		int flow() { return _upper - _residue; }
 		int upper() { return _upper; }
@@ -29,14 +30,16 @@ class edge
 		void push_flow(int);
 		edge *reverse() { return _reverse; }
 		vertex* v() { return _v; }
+		vertex* v_op() { return _v_op; }
 };
 
 edge::edge() : _v(NULL), _residue(0), _upper(0)
 {}
 
-void edge::set_edge(vertex* v, int upper, edge* reverse)
+void edge::set_edge(vertex* v, vertex* v_op, int upper, edge* reverse)
 {
 	_v = v;
+	_v_op = v_op;
 	_upper = upper;
 	_residue = upper;
 	_reverse = reverse;

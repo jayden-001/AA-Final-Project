@@ -18,7 +18,6 @@ int sequential(graph*);
 int main(int argc, char **argv)
 {
    graph* g = generate_easy_graph(argv[1]);
-   g->display_upper();
 //  graph* g = generate_complete_graph(atoi(argv[1]));
 //	parallel(g);
 //  delete g;
@@ -53,10 +52,10 @@ int sequential(graph *g)
 void result(graph *g, clock_t start, clock_t end)
 {
 //    g->display_flow();
-//   if (g->is_valid_flow())
+   if (g->is_valid_flow())
  		cout<<"flow is valid: "<<g->flow()<<endl;
-//   else
-// 		cout<<"flow is invalid"<<endl;
+   else
+ 		cout<<"flow is invalid"<<endl;
 	cout << ((double) (end - start)) / CLOCKS_PER_SEC
 			<< " seconds in total" << endl;
 }

@@ -17,10 +17,10 @@ void push(vertex* v, edge *e)
 	assert(e->v() == v);
 	assert(v->excess() > 0);
 	assert(e->residue() > 0);
-	assert(v->height() == e->reverse()->v()->height() + 1);
+	assert(v->height() == e->v_op()->height() + 1);
 	int d = min(v->excess(), e->residue());
 	e->push_flow(d);
-	vertex* w = e->reverse()->v();
+	vertex* w = e->v_op();
 	v->update_excess(-d);
 	w->update_excess(d);
 }
@@ -33,7 +33,7 @@ void relabel(vertex* v)
 
 	for( int i = 0; i < numOfEdges; i++){
 		edge* currentEdge = edges->at(i);
-		vertex* w = currentEdge->reverse()->v();
+		vertex* w = currentEdge->v_op();
 		if (currentEdge->residue() > 0 && w->height()+1 < minHeight) {
 			minHeight = w->height()+1;
 		}
@@ -49,7 +49,7 @@ void push_relabel(vertex* v)
 	assert(v->excess() > 0);	// must be active
 	edge* e = v->cur_edge();
 
-	if (e->residue() > 0 && v->height() == e->reverse()->v()->height() + 1) {
+	if (e->residue() > 0 && v->height() == e->v_op()->height() + 1) {
 		push(v, e);
 	} else {
 		if (!v->is_last()) {
@@ -70,7 +70,7 @@ void discharge(queue<vertex*>* Q, vertex* source, vertex* sink)
 	int i = 0;
  	while (v->excess() != 0 && v->height() == h){
 		push_relabel(v);
-		vertex* w = v->cur_edge()->reverse()->v();
+		vertex* w = v->cur_edge()->v_op();
 		if ( w->excess() > 0 && w != source && w!= sink )
 			Q->push(w);
  	}
@@ -88,7 +88,7 @@ void discharge(priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q,
  	while (v->excess() != 0 && v->height() == h){
  		//cout << v->excess() << endl;
 		push_relabel(v);
-		vertex* w = v->cur_edge()->reverse()->v();
+		vertex* w = v->cur_edge()->v_op();
 		if ( w->excess() > 0 && w != source && w!= sink )
 			Q->push(w);
  	}
