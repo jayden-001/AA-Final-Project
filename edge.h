@@ -17,29 +17,43 @@ class edge
 		int _upper12; //capacity
 		int _upper21; //capacity
 		int _flow;
+		int _residue;
+		edge *_reverse;
 		vertex* _v1;
 		vertex* _v2;
 
 	public:
 		edge(vertex*, vertex*, int, int, int);
-		int cost();
+		int cost() { return _cost; }
 		int flow(vertex*);
 		int upper(vertex*);
+		int residue() { return _residue; };
+		void add_residue(int i) { _residue += i; }
+		void set_residue(int i) { _residue = i; }
+		void push_flow(int);
+		edge *reverse() { return _reverse; }
 		int residue(vertex*);
 		void update_flow(vertex*, int);
-		vertex* v1();
-		vertex* v2();
+		vertex* v1() { return _v1; }
+		vertex* v2() { return _v2; }
 		vertex* opposite(vertex* v);
 };
 
 edge::edge(vertex* v1, vertex* v2, int upper12 = 0, int upper21 = 0, int c = 0) :
-	_v1(v1), _v2(v2), _cost(c), _flow(0), _upper12(upper12), _upper21(upper21)
+	_v1(v1), _v2(v2), _cost(c), _residue(c), _flow(0), _upper12(upper12), _upper21(upper21)
 {
 	v1->edges()->push_back(this);
 	v2->edges()->push_back(this);
 }
 
-int edge::cost() { return _cost; }
+void edge::push_flow(int i)
+{
+	assert(i <= _residue);
+	_residue -= i;
+	_reverse->add_residue(i);
+	assert(_residue <= _upper || 
+		_reverse->residue() <= _reverse->upper());
+}
 
 int edge::flow(vertex* v) 
 {
@@ -48,10 +62,6 @@ int edge::flow(vertex* v)
 	else
 		return -(_flow);
 }
-
-vertex* edge::v1() { return _v1; }
-
-vertex* edge::v2() { return _v2; }
 
 int edge::upper(vertex* v)
 {
