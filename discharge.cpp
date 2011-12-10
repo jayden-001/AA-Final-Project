@@ -14,16 +14,15 @@ using namespace std;
 
 void push(vertex* v, edge *e)
 {
-	assert(e->v1() == v || e->v2() == v);
+	assert(e->v() == v);
 	assert(v->excess() > 0);
-	assert(e->residue(v) > 0);
-	assert(v->height() == e->opposite(v)->height() + 1);
-	int d = min(v->excess(), e->residue(v));
-	e->update_flow(v, d);
-	vertex* w = e->opposite(v);
+	assert(e->residue() > 0);
+	assert(v->height() == e->reverse()->v()->height() + 1);
+	int d = min(v->excess(), e->residue());
+	e->push_flow(d);
+	vertex* w = e->reverse()->v();
 	v->update_excess(-d);
-	w->update_excess(d);	
-
+	w->update_excess(d);
 }
 
 void relabel(vertex* v)
@@ -34,12 +33,12 @@ void relabel(vertex* v)
 
 	for( int i = 0; i < numOfEdges; i++){
 		edge* currentEdge = edges->at(i);
-		vertex* w = currentEdge->opposite(v);
-		if (currentEdge->residue(v) > 0 && w->height()+1 < minHeight) {
+		vertex* w = currentEdge->reverse()->v();
+		if (currentEdge->residue() > 0 && w->height()+1 < minHeight) {
 			minHeight = w->height()+1;
-			v->set_height(minHeight);
 		}
 	}
+	v->set_height(minHeight);
 	
 	assert(minHeight != INT_MAX);
 	
@@ -50,7 +49,7 @@ void push_relabel(vertex* v)
 	assert(v->excess() > 0);	// must be active
 	edge* e = v->cur_edge();
 
-	if (e->residue(v) > 0 && v->height() == e->opposite(v)->height() + 1) {
+	if (e->residue() > 0 && v->height() == e->reverse()->v()->height() + 1) {
 		push(v, e);
 	} else {
 		if (!v->is_last()) {
@@ -71,7 +70,7 @@ void discharge(queue<vertex*>* Q, vertex* source, vertex* sink)
 	int i = 0;
  	while (v->excess() != 0 && v->height() == h){
 		push_relabel(v);
-		vertex* w = v->cur_edge()->opposite(v);
+		vertex* w = v->cur_edge()->reverse()->v();
 		if ( w->excess() > 0 && w != source && w!= sink )
 			Q->push(w);
  	}
@@ -89,7 +88,7 @@ void discharge(priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q,
  	while (v->excess() != 0 && v->height() == h){
  		//cout << v->excess() << endl;
 		push_relabel(v);
-		vertex* w = v->cur_edge()->opposite(v);
+		vertex* w = v->cur_edge()->reverse()->v();
 		if ( w->excess() > 0 && w != source && w!= sink )
 			Q->push(w);
  	}

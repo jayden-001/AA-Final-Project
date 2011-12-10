@@ -16,9 +16,9 @@ void sequential_maxflow(graph* g)
 	for (int i = 0; i < edges->size(); i++) {
 		edge* e = edges->at(i);
 		
-		e->update_flow(s, e->upper(s));
-		e->opposite(s)->update_excess(e->upper(s));
-		Q.push(e->opposite(s));
+		e->push_flow(e->upper());
+		e->reverse()->v()->update_excess(e->upper());
+		Q.push(e->reverse()->v());
 	}
 	
 	// initialize label

@@ -20,7 +20,10 @@ class vertex
 		vector<edge*> _edges;
 
 	public:
+		vertex();
 		vertex(int);
+		
+		void set_index(int);
 		
 		int index();
 
@@ -36,8 +39,16 @@ class vertex
 		bool is_last();
 };
 
+vertex::vertex() : _index(0), _height(0), _excess(0), _cur_edge(0)
+{}
+
 vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0)
 {}
+
+void vertex::set_index(int index)
+{
+	_index = index;
+}
 
 int vertex::height() { return _height; }
 

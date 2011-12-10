@@ -15,6 +15,7 @@ graph* generate_easy_graph(const char* graph_file)
 	bool started = false;
 	int state = 0;
 	int n = 0;
+	int m = 0;
 	long long v1 = 0;
 	long long v2 = 0;
 	
@@ -26,23 +27,28 @@ graph* generate_easy_graph(const char* graph_file)
 		while (!reader.eof()) {
 			reader >> buffer;
 			switch (buffer[0]) {
-			case 'n':
+			case 'p':
 				started = true;
 				state = 1;
 				break;
 			case 'a':
 				if (started) {
-					state = 2;
+					state = 3;
 				}
 				break;
 			default:
 				switch (state) {
 				case 1:
-					state = 0;
+					reader >> buffer;
+					state = 2;
 					istringstream(string(buffer)) >> n; 
 					break;
 				case 2:
 					state = 3;
+					istringstream(string(buffer)) >> m;
+					break;
+				case 3:
+					state = 4;
 					istringstream(string(buffer)) >> v1;
 					if (v1 == 1) {
 						v1 = 0;
@@ -50,8 +56,8 @@ graph* generate_easy_graph(const char* graph_file)
 						v1 = 1;
 					}
 					break;
-				case 3:
-					state = 4;
+				case 4:
+					state = 5;
 					istringstream(string(buffer)) >> v2;
 					if (v2 == 1) {
 						v2 = 0;
@@ -59,7 +65,7 @@ graph* generate_easy_graph(const char* graph_file)
 						v2 = 1;
 					}
 					break;
-				case 4:
+				case 5:
 					state = 0;
 					int c;
 					istringstream(string(buffer)) >> c;
@@ -73,12 +79,12 @@ graph* generate_easy_graph(const char* graph_file)
 	}
 	reader.close();
 	
-	// creating
-	graph* g = new graph();
-	for (int i = 2; i < n; i++) {
-		g->add_vertex();
-	}
+	cout << n << ", " << m << endl;
 	
+	// creating
+	graph* g = new graph(n, m);
+
+	cout << "done here" << endl;
 	map<long long,int>::iterator iter;   
 	for( iter = costmap.begin(); iter != costmap.end(); iter++ ) {
 		long long index = iter->first;
@@ -90,9 +96,10 @@ graph* generate_easy_graph(const char* graph_file)
 		
 		int upper12 = costmap.count(v1*n+v2) == 0 ? 0 : costmap[v1*n + v2];
 		int upper21 = costmap.count(v2*n+v1) == 0 ? 0 : costmap[v2*n + v1];
-		if (v1 >= v2 && upper21!=0)	continue;
-		g->add_edge(v1,v2,upper12,upper21,0);
-		
+//		if (v1 >= v2 && upper21!=0)	continue;
+// 		g->add_edge(v1,v2,upper12,upper21,0);
+//		g->add_edge(v1,v2,upper12,upper21);
+		g->add_edge(v1,v2,upper12);
 	}
 	
  	cout << "n=" << g->n() << endl;
@@ -104,57 +111,57 @@ graph* generate_easy_graph(const char* graph_file)
 }
 
 
-graph* generate_trivial_graph()
-{
-	graph* g = new graph();
-	g->add_vertex();
-	g->add_vertex();
-
-	g->add_edge(0,2,5,0,0);
-	g->add_edge(0,3,1,0,0);
-	g->add_edge(2,3,2,3,0);
-	g->add_edge(3,1,5,0,0);
-	g->add_edge(2,1,2,0,0);
-
-	return g;
-}
-
-graph* generate_complete_graph(int graph_size)
-{
-	graph* g = new graph();
-	// add vertices
-	for (int i = 2; i < graph_size; i++){
-		g->add_vertex();
-	}
-	// add edges
-	for (int i = 0; i < graph_size; i++){
-		for (int j = i+1; j < graph_size; j++){
-			g->add_edge(i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
-		}
-	}
-	return g;
-}
-
-graph* generate_dumbbell_graph(int graph_size)
-{
-	graph* g = new graph();
-	// add vertices
-	for (int i = 2; i < graph_size*2; i++){
-		g->add_vertex();
-	}
-	
-	// add edges
-	for (int i = 0; i < graph_size; i++){
-		for (int j = i+1; j < graph_size; j++){
-			g->add_edge(i==0 ? 0 : i+1, j+1, rand()%1000 + 1,rand()%1000 + 1,0 );
-		}
-	}
-	for (int i = graph_size; i < graph_size*2; i++){
-		for (int j = i+1; j < graph_size*2; j++){
-			g->add_edge(i==graph_size ? 1 : i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
-		}
-	}
-	g->add_edge(2, graph_size*2-1, 10, 0, 0);
-	return g;
-	
-}
+// graph* generate_trivial_graph()
+// {
+// 	graph* g = new graph();
+// 	g->add_vertex();
+// 	g->add_vertex();
+// 
+// 	g->add_edge(0,2,5,0,0);
+// 	g->add_edge(0,3,1,0,0);
+// 	g->add_edge(2,3,2,3,0);
+// 	g->add_edge(3,1,5,0,0);
+// 	g->add_edge(2,1,2,0,0);
+// 
+// 	return g;
+// }
+// 
+// graph* generate_complete_graph(int graph_size)
+// {
+// 	graph* g = new graph();
+// 	// add vertices
+// 	for (int i = 2; i < graph_size; i++){
+// 		g->add_vertex();
+// 	}
+// 	// add edges
+// 	for (int i = 0; i < graph_size; i++){
+// 		for (int j = i+1; j < graph_size; j++){
+// 			g->add_edge(i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
+// 		}
+// 	}
+// 	return g;
+// }
+// 
+// graph* generate_dumbbell_graph(int graph_size)
+// {
+// 	graph* g = new graph();
+// 	// add vertices
+// 	for (int i = 2; i < graph_size*2; i++){
+// 		g->add_vertex();
+// 	}
+// 	
+// 	// add edges
+// 	for (int i = 0; i < graph_size; i++){
+// 		for (int j = i+1; j < graph_size; j++){
+// 			g->add_edge(i==0 ? 0 : i+1, j+1, rand()%1000 + 1,rand()%1000 + 1,0 );
+// 		}
+// 	}
+// 	for (int i = graph_size; i < graph_size*2; i++){
+// 		for (int j = i+1; j < graph_size*2; j++){
+// 			g->add_edge(i==graph_size ? 1 : i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
+// 		}
+// 	}
+// 	g->add_edge(2, graph_size*2-1, 10, 0, 0);
+// 	return g;
+// 	
+// }
