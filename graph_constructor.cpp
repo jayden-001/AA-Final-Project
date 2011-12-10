@@ -28,6 +28,8 @@ graph* generate_easy_graph(const char* graph_file)
 			reader >> buffer;
 			switch (buffer[0]) {
 			case 'p':
+				if (buffer[1]  != '\0')
+					break;
 				started = true;
 				state = 1;
 				break;
@@ -44,11 +46,13 @@ graph* generate_easy_graph(const char* graph_file)
 					istringstream(string(buffer)) >> n; 
 					break;
 				case 2:
-					state = 3;
+					state = 0;
 					istringstream(string(buffer)) >> m;
 					break;
 				case 3:
 					state = 4;
+					//cout << buffer << endl;
+
 					istringstream(string(buffer)) >> v1;
 					if (v1 == 1) {
 						v1 = 0;
@@ -58,6 +62,7 @@ graph* generate_easy_graph(const char* graph_file)
 					break;
 				case 4:
 					state = 5;
+					//cout << buffer << endl;
 					istringstream(string(buffer)) >> v2;
 					if (v2 == 1) {
 						v2 = 0;
@@ -68,6 +73,7 @@ graph* generate_easy_graph(const char* graph_file)
 				case 5:
 					state = 0;
 					int c;
+					//cout << buffer << endl;
 					istringstream(string(buffer)) >> c;
 					long long index = v1*n + v2;
 					assert(index >= 0);
@@ -85,6 +91,7 @@ graph* generate_easy_graph(const char* graph_file)
 	graph* g = new graph(n, m);
 
 	cout << "done here" << endl;
+	cout << costmap.size() << endl;
 	map<long long,int>::iterator iter;   
 	for( iter = costmap.begin(); iter != costmap.end(); iter++ ) {
 		long long index = iter->first;

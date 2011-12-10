@@ -18,6 +18,7 @@ int sequential(graph*);
 int main(int argc, char **argv)
 {
    graph* g = generate_easy_graph(argv[1]);
+//   g->display_upper();
 //  graph* g = generate_complete_graph(atoi(argv[1]));
 //	parallel(g);
 //  delete g;
