@@ -17,10 +17,11 @@ int sequential(graph*);
 
 int main(int argc, char **argv)
 {
-   graph* g = generate_complete_graph(atoi(argv[1]));
+	graph* g = generate_easy_graph(argv[1]);
+//   graph* g = generate_complete_graph(atoi(argv[1]));
 //	parallel(g);
 //  delete g;
-   g = generate_complete_graph(atoi(argv[1]));
+//   g = generate_complete_graph(atoi(argv[1]));
   sequential(g);
   return 0;
 }
