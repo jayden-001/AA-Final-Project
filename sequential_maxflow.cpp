@@ -6,6 +6,9 @@ using namespace std;
 
 void sequential_maxflow(graph* g)
 {
+	int push_counter = 0;
+	int relabel_counter = 0;
+
 	vertex* s = g->s();
 	vertex* t = g->t();
 // 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
@@ -26,6 +29,9 @@ void sequential_maxflow(graph* g)
 	
 	// loop
 	while (Q.size() != 0) {
-		discharge(&Q, g->s(), g->t());
+		discharge(&Q, g->s(), g->t(), &push_counter, &relabel_counter);
 	}
+	
+	cout << "Push counts: " << push_counter << endl;
+	cout << "Relabel counts: " << relabel_counter << endl;
 }
