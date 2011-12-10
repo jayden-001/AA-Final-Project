@@ -80,11 +80,11 @@ void graph::display_flow()
 		int v1 = e->v1()->index();
 		int v2 = e->v2()->index();
 		
-		if (e->flow() > 0)
-			cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1()) <<","<< e->flow() <<  endl;
+		if (e->flow(e->v1()) > 0)
+			cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1()) <<","<< e->flow(e->v1()) <<  endl;
 		
-		if (e->flow() < 0)
-			cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) <<","<< -(e->flow()) << endl;
+		if (e->flow(e->v1()) < 0)
+			cout << v2 << '\t' << v1 << '\t' << e->upper(e->v2()) <<","<< -(e->flow(e->v1())) << endl;
 		
 // 		if (e->upper(e->v1()) != 0)
 // 			cout << v1 << '\t' << v2 << '\t' << e->upper(e->v1()) <<","<< e->flow() <<  endl;
@@ -97,11 +97,38 @@ void graph::display_flow()
 
 bool graph::is_valid_flow()
 {
+	bool flag = true;
 	for (int i = 2; i < _n; i++){
-		if ( _vertices[i]->excess() != 0)
-			return false;	
+		int excess = 0;
+        	int n_outgoing_edges = _vertices[i]->edges()->size();
+        	for (int j = 0; j < n_outgoing_edges; j++){
+			edge* e = _vertices[i]->edges()->at(j);
+			int flow = e->flow(_vertices[i]);
+                	excess += flow;
+        	}
+		if (excess != 0){
+			cout << "flow is not conserved at vertex: " << i << " excess: " << excess << endl;
+			flag = false;
+		}
+	
 	}
-	return true;
+	for (int i = 0; i < _m; i++){
+		edge* e = _edges[i];
+		vertex* v1 = e->v1();
+		vertex* v2 = e->v2();
+		if (  e->flow(v1) > e->upper(v1) ){
+                	cout << "flow exceeds upper bound from vertex: " << v1->index() << " to vertex: " << v2->index()
+                        <<  " flow: " << e->flow(v1) << " upper: " <<  e->upper(v1) << endl;
+			flag = false;
+                }
+		else if (e->flow(v2) > e->upper(v2)){
+			cout << "flow exceeds upper bound from vertex: " << v2->index() << " to vertex: " << v1->index() 
+			<<  " flow: " << e->flow(v2) << " upper: " <<  e->upper(v2) << endl;
+                        flag = false;
+		}
+	}
+
+	return flag;
 }
 
 int graph::flow()
@@ -109,7 +136,7 @@ int graph::flow()
 	int flow = 0;
 	int n_outgoing_edges = _vertices[0]->edges()->size();
 	for (int i = 0; i < n_outgoing_edges; i++){
-		flow += _vertices[0]->edges()->at(i)->flow();
+		flow += _vertices[0]->edges()->at(i)->flow(_vertices[0]);
 	}
 	return flow;
 }

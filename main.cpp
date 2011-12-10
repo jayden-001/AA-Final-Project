@@ -1,13 +1,13 @@
+#include <cstdlib>
 #include <iostream>
 #include <assert.h>
+#include <time.h>
 #include "graph.h"
-// #include "vertex.h"
-// #include "edge.h"
 #include "graph_constructor.cpp"
 #include "sequential_maxflow.cpp"
 #include "parallel_maxflow.cpp"
-#include <cilk/reducer_opadd.h>
-#include <time.h>
+#include "reducer_list.cpp"
+//#include <cilk/cilk_stub.h>
 
 #define print(x) std::cout << x << std::endl
 
@@ -17,14 +17,11 @@ int sequential(graph*);
 
 int main(int argc, char **argv)
 {
-//   graph* g = generate_easy_graph(argv[1]);
-//   srand(1);
-//   graph* g = generate_dumbbell_graph(10);
-//   parallel(g);
-//   delete g;
-//   srand(1);
-//   g = generate_dumbbell_graph(10);
-  graph* g = generate_easy_graph(argv[1]);
+   graph* g = generate_easy_graph(argv[1]);
+//  graph* g = generate_complete_graph(atoi(argv[1]));
+//	parallel(g);
+//  delete g;
+//   g = generate_complete_graph(atoi(argv[1]));
   sequential(g);
   return 0;
 }

@@ -23,7 +23,7 @@ class edge
 	public:
 		edge(vertex*, vertex*, int, int, int);
 		int cost();
-		int flow();
+		int flow(vertex*);
 		int upper(vertex*);
 		int residue(vertex*);
 		void update_flow(vertex*, int);
@@ -41,7 +41,13 @@ edge::edge(vertex* v1, vertex* v2, int upper12 = 0, int upper21 = 0, int c = 0) 
 
 int edge::cost() { return _cost; }
 
-int edge::flow() { return _flow; }
+int edge::flow(vertex* v) 
+{
+	if (v == _v1) 
+		return _flow;
+	else
+		return -(_flow);
+}
 
 vertex* edge::v1() { return _v1; }
 
