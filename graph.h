@@ -24,10 +24,11 @@ class graph
 		void display_flow();
  		bool is_valid_flow();
 		int flow();
-		int n();
-		int m();
-		vertex* s();
-		vertex* t();
+		int n() { return _n; }
+		int m() { return _m; }
+		vertex* s() { return &_vertices[0]; }
+		vertex* t() { return &_vertices[1]; }
+		vertex* v() { return _vertices; }
 };
 
 graph::graph(int n, int m) : _n(n), _m(0)
@@ -112,17 +113,5 @@ int graph::flow()
 // 	return flow;
 	return t()->excess();
 }
-
-int graph::n() { return _n; }
-
-int graph::m() { return _m; }
-
-vertex* graph::s() { return &(_vertices[0]); }
-
-vertex* graph::t() { return &(_vertices[1]); }
-
-// vector<vertex*>* graph::v() { return &_vertices; }
-// 
-// vector<edge*>* graph::e() { return &_edges; }
 
 #endif

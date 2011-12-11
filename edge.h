@@ -21,7 +21,6 @@ class edge
 	public:
 		edge();
 		void set_edge(vertex* v, vertex* _v_op, int upper, edge* reverse);
-		
 		int flow() { return _upper - _residue; }
 		int upper() { return _upper; }
 		int residue() { return _residue; };
@@ -33,7 +32,7 @@ class edge
 		vertex* v_op() { return _v_op; }
 };
 
-edge::edge() : _v(NULL), _residue(0), _upper(0)
+edge::edge() : _v(NULL), _v_op(NULL), _residue(0), _upper(0)
 {}
 
 void edge::set_edge(vertex* v, vertex* v_op, int upper, edge* reverse)
@@ -52,7 +51,8 @@ void edge::push_flow(int i)
 	assert(i <= _residue);
 	_residue -= i;
 	_reverse->add_residue(i);
-	assert(_residue <= _upper || _reverse->residue() <= _reverse->upper());
+	assert(_residue + _reverse->residue() == -upper ||
+		_residue + _reverse->residue() == _reverse->upper());
 }
 
 #endif
