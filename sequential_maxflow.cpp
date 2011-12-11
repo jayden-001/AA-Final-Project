@@ -23,7 +23,7 @@ void global_update(graph* g)
 		for (int i = 0; i < edges->size(); i++) {
 			edge* e = edges->at(i);
 			vertex* op = e->v_op();
-			if (e->reverse()->residue() != 0 && op->height() == g->n() && op != t) {
+			if (e->reverse()->residue() != 0 && op->height() == g->n()) {
 				op->set_height(v->height()+1);
 				bfsQ.push(op);
 			}
@@ -68,4 +68,5 @@ void sequential_maxflow(graph* g)
 	
 	cout << "Push counts: " << push_counter << endl;
 	cout << "Relabel counts: " << relabel_counter << endl;
+	cout << "Discharge counts: " << discharge_counter << endl;
 }

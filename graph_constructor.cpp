@@ -51,7 +51,6 @@ graph* generate_easy_graph(const char* graph_file)
 					break;
 				case 3:
 					state = 4;
-					//cout << buffer << endl;
 
 					istringstream(string(buffer)) >> v1;
 					if (v1 == 1) {
@@ -62,7 +61,6 @@ graph* generate_easy_graph(const char* graph_file)
 					break;
 				case 4:
 					state = 5;
-					//cout << buffer << endl;
 					istringstream(string(buffer)) >> v2;
 					if (v2 == 1) {
 						v2 = 0;
@@ -73,7 +71,6 @@ graph* generate_easy_graph(const char* graph_file)
 				case 5:
 					state = 0;
 					int c;
-					//cout << buffer << endl;
 					istringstream(string(buffer)) >> c;
 					long long index = v1*n + v2;
 					assert(index >= 0);
@@ -85,13 +82,9 @@ graph* generate_easy_graph(const char* graph_file)
 	}
 	reader.close();
 	
-	cout << n << ", " << m << endl;
-	
 	// creating
 	graph* g = new graph(n, m);
 
-	cout << "done here" << endl;
-	cout << costmap.size() << endl;
 	map<long long,int>::iterator iter;   
 	for( iter = costmap.begin(); iter != costmap.end(); iter++ ) {
 		long long index = iter->first;
@@ -101,11 +94,8 @@ graph* generate_easy_graph(const char* graph_file)
 		assert (v1 < n && v1 >= 0);
 		assert (v2 < n && v2 >= 0);
 		
-		int upper12 = costmap.count(v1*n+v2) == 0 ? 0 : costmap[v1*n + v2];
-		int upper21 = costmap.count(v2*n+v1) == 0 ? 0 : costmap[v2*n + v1];
-//		if (v1 >= v2 && upper21!=0)	continue;
-// 		g->add_edge(v1,v2,upper12,upper21,0);
-//		g->add_edge(v1,v2,upper12,upper21);
+		int upper12 = costmap[v1*n + v2];
+
 		g->add_edge(v1,v2,upper12);
 	}
 	
@@ -118,57 +108,52 @@ graph* generate_easy_graph(const char* graph_file)
 }
 
 
-// graph* generate_trivial_graph()
-// {
-// 	graph* g = new graph();
-// 	g->add_vertex();
-// 	g->add_vertex();
-// 
-// 	g->add_edge(0,2,5,0,0);
-// 	g->add_edge(0,3,1,0,0);
-// 	g->add_edge(2,3,2,3,0);
-// 	g->add_edge(3,1,5,0,0);
-// 	g->add_edge(2,1,2,0,0);
-// 
-// 	return g;
-// }
-// 
-// graph* generate_complete_graph(int graph_size)
-// {
-// 	graph* g = new graph();
-// 	// add vertices
-// 	for (int i = 2; i < graph_size; i++){
-// 		g->add_vertex();
-// 	}
-// 	// add edges
-// 	for (int i = 0; i < graph_size; i++){
-// 		for (int j = i+1; j < graph_size; j++){
-// 			g->add_edge(i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
-// 		}
-// 	}
-// 	return g;
-// }
-// 
-// graph* generate_dumbbell_graph(int graph_size)
-// {
-// 	graph* g = new graph();
-// 	// add vertices
-// 	for (int i = 2; i < graph_size*2; i++){
-// 		g->add_vertex();
-// 	}
-// 	
-// 	// add edges
-// 	for (int i = 0; i < graph_size; i++){
-// 		for (int j = i+1; j < graph_size; j++){
-// 			g->add_edge(i==0 ? 0 : i+1, j+1, rand()%1000 + 1,rand()%1000 + 1,0 );
-// 		}
-// 	}
-// 	for (int i = graph_size; i < graph_size*2; i++){
-// 		for (int j = i+1; j < graph_size*2; j++){
-// 			g->add_edge(i==graph_size ? 1 : i,j,rand()%1000 + 1,rand()%1000 + 1,0 );
-// 		}
-// 	}
-// 	g->add_edge(2, graph_size*2-1, 10, 0, 0);
-// 	return g;
-// 	
-// }
+graph* generate_trivial_graph()
+{
+	graph* g = new graph(4,6);
+
+	g->add_edge(0,2,5);
+	g->add_edge(0,3,1);
+	g->add_edge(2,3,2);
+	g->add_edge(3,1,5);
+	g->add_edge(3,2,3);
+	g->add_edge(2,1,2);
+
+	return g;
+}
+
+graph* generate_complete_graph(int graph_size)
+{
+	graph* g = new graph(graph_size, graph_size*(graph_size-1));
+
+	// add edges
+	for (int i = 0; i < graph_size; i++){
+		for (int j = i+1; j < graph_size; j++){
+			g->add_edge(i,j,rand()%1000 + 1);
+			g->add_edge(j,i,rand()%1000 + 1);
+		}
+	}
+	return g;
+}
+
+graph* generate_dumbbell_graph(int graph_size)
+{
+	graph* g = new graph(2*graph_size, 2*graph_size*(graph_size-1) + 1);
+	
+	// add edges
+	for (int i = 0; i < graph_size; i++){
+		for (int j = i+1; j < graph_size; j++){
+			g->add_edge(i==0 ? 0 : i+1, j+1, rand()%1000 + 1);
+			g->add_edge(j+1, i==0 ? 0 : i+1, rand()%1000 + 1);
+		}
+	}
+	for (int i = graph_size; i < graph_size*2; i++){
+		for (int j = i+1; j < graph_size*2; j++){
+			g->add_edge(i==graph_size ? 1 : i,j,rand()%1000 + 1);
+			g->add_edge(j,i==graph_size ? 1 : i,rand()%1000 + 1);
+		}
+	}
+	g->add_edge(2, graph_size*2-1, 10);
+	return g;
+	
+}
