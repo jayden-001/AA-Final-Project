@@ -43,7 +43,7 @@ void edge::set_edge(vertex* v, vertex* v_op, int upper, edge* reverse)
 	_residue = upper;
 	_reverse = reverse;
 	
-	v->edges()->push_back(this);
+	v->add_edge(this);
 }
 
 void edge::push_flow(int i)
@@ -51,8 +51,8 @@ void edge::push_flow(int i)
 	assert(i <= _residue);
 	_residue -= i;
 	_reverse->add_residue(i);
-	assert(_residue + _reverse->residue() == -upper ||
-		_residue + _reverse->residue() == _reverse->upper());
+// 	assert(_residue + _reverse->residue() == -upper ||
+// 		_residue + _reverse->residue() == _reverse->upper());
 }
 
 #endif

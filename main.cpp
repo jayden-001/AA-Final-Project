@@ -23,8 +23,8 @@ int main(int argc, char **argv)
 //  graph* g = generate_complete_graph(atoi(argv[1]));
 //	parallel(g);
 //  delete g;
-	front_relabel(g);
-	g = generate_easy_graph(argv[1]);
+// 	front_relabel(g);
+// 	g = generate_easy_graph(argv[1]);
   sequential(g);
   return 0;
 }

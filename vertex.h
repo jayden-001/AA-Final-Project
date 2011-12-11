@@ -16,8 +16,10 @@ class vertex
 		int _height;
 		int _excess;
 		int _cur_edge;
+		int _last_edge;
 		int _index;
 		vector<edge*> _edges;
+
 
 	public:
 		vertex();
@@ -31,30 +33,34 @@ class vertex
 		
 		int excess() { return _excess; }
 		void update_excess(int);
-				
+		
+		void add_edge(edge*);
 		vector<edge*>* edges() { return &_edges; }
 		edge* next_edge();
 		edge* cur_edge() { return _edges[_cur_edge]; }
-		bool is_last() { return _cur_edge == _edges.size() - 1; }
+		bool is_last() { return _cur_edge == _last_edge; }
 };
 
-vertex::vertex() : _height(0), _excess(0), _cur_edge(0)
+vertex::vertex() : _height(0), _excess(0), _cur_edge(0), _last_edge(0)
 {}
 
-vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0)
+vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0), _last_edge(0)
 {}
+
+void vertex::add_edge(edge* e)
+{
+	_edges.push_back(e);
+	_last_edge = _edges.size() - 1;
+}
 
 edge* vertex::next_edge()
 {
-	int s = _edges.size();
 	_cur_edge++;
-	if (_cur_edge < s){
-		return _edges[_cur_edge];
-	}
-	else {
+	if (_cur_edge > _last_edge) {
 		_cur_edge = 0;
 		return _edges[_cur_edge];
 	}
+	return _edges[_cur_edge];
 }
 
 void vertex::update_excess(int i)
@@ -67,7 +73,7 @@ class CompareVertex {
 	public:
 		bool operator()( vertex* v1, vertex* v2 )
 		{
-			return v1->height() >= v2->height();
+			return v1->height() < v2->height();
 		}
 };
 
