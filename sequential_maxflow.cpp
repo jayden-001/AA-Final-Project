@@ -3,6 +3,7 @@
 #include <queue>
 
 using namespace std;
+vector<bool> queued;
 
 void global_update(graph* g, priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q)
 {
@@ -60,15 +61,20 @@ void sequential_maxflow(graph* g)
 	int n = g->n();
  	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
 //	queue<vertex*> Q;
-	
+	queued.resize(g->n(), false);
+	queued[0] = true;
+	queued[1] = true;
+
 	// initialize preflow
 	vector<edge*>* edges = s->edges();
 	for (int i = 0; i < edges->size(); i++) {
 		edge* e = edges->at(i);
-		
-		e->push_flow(e->upper());
+		if (e->residue() <= 0)
+			continue;
+		e->push_flow(e->residue());
 		e->reverse()->v()->update_excess(e->upper());
 		Q.push(e->v_op());
+		queued[e->v_op()->index()] = true;
 	}
 	
 	// initialize label
@@ -76,7 +82,7 @@ void sequential_maxflow(graph* g)
 	global_update(g, &Q);
 	
 	// loop
-	while (Q.size() != 0) {
+	while (!Q.empty()) {
 		discharge(&Q, s, t, &push_counter, &relabel_counter);
 		discharge_counter++;
 		

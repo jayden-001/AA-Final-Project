@@ -7,25 +7,23 @@
 #include "sequential_maxflow.cpp"
 // #include "parallel_maxflow.cpp"
 // #include "reducer_list.cpp"
-#include "relabel_to_front.cpp"
+//#include "relabel_to_front.cpp"
+#include "gap_heuristic.cpp"
 
 #define print(x) std::cout << x << std::endl
 
 void result(graph*, clock_t, clock_t);
 int parallel(graph*);
 int sequential(graph*);
-int front_relabel(graph*);
+int gap(graph*);
 
 int main(int argc, char **argv)
 {
-    graph* g = generate_easy_graph(argv[1]);
-//   graph* g = generate_dumbbell_graph(100);
-//   g->display_upper();
-//  graph* g = generate_complete_graph(atoi(argv[1]));
-//	parallel(g);
-//  delete g;
-// 	front_relabel(g);
-// 	g = generate_easy_graph(argv[1]);
+	graph* g = generate_easy_graph(argv[1]);
+//	graph* g = generate_trivial_graph();
+ 	gap(g);
+ 	g = generate_easy_graph(argv[1]);
+// 	g = generate_trivial_graph();
   sequential(g);
   return 0;
 }
@@ -42,14 +40,13 @@ int main(int argc, char **argv)
 //  	return 0;
 // }
 
-int front_relabel(graph *g)
+int gap(graph *g)
 {
 	initialize(g);
 	clock_t start, end;
-  print("running relabel to front");
+  print("running gap relabel");
   start = clock();
-	relabel_to_front(g);
-//	sequential_maxflow(g);
+	gap_relabel(g);
   end = clock();
   result(g, start, end);
   return 0;

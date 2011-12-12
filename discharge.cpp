@@ -6,10 +6,13 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <cilk/cilk.h>
 #include "graph.h"
 #include "limits.h"
 
 using namespace std;
+
+extern vector<bool> queued;
 
 void push(vertex* v, edge *e)
 {
@@ -53,11 +56,13 @@ void push_relabel(vertex* v, int* push_counter, int* relabel_counter)
 		push(v, e);
 		*push_counter += 1;
 	} else {
-		if (v->is_last()) {
+		if (!v->is_last()) {
+			v->next_edge();
+		} else {
+			v->next_edge();
 			relabel(v);
 			*relabel_counter += 1;
 		}
-		v->next_edge();
 	}
 
 }
@@ -65,14 +70,18 @@ void push_relabel(vertex* v, int* push_counter, int* relabel_counter)
 void discharge(queue<vertex*>* Q, vertex* source, vertex* sink, int* push_counter, int* relabel_counter)
 {
 	vertex* v = Q->front();
+	queued[v->index()] = false;
 	Q->pop();
-//	int h = v->height();
-//	int i = 0;
+	int h = v->height();
+	int i = 0;
  	while (v->excess() != 0) { // && v->height() == h){
 		push_relabel(v, push_counter, relabel_counter);
 		vertex* w = v->cur_edge()->v_op();
-		if ( w->excess() > 0 && w != source && w!= sink )
+//		if ( w->excess() > 0 && w != source && w!= sink )
+		if (!queued[w->index()]){ 
 			Q->push(w);
+			queued[w->index()] = true;
+		}
  	}
 // 	if ( v->excess() > 0 )
 // 		Q->push(v);
@@ -83,18 +92,22 @@ void discharge(priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q,
 {
 	vertex* v = Q->top();
 	Q->pop();
-// 	int h = v->height();
-// 	int i = 0;
- 	while (v->excess() != 0) {//&& v->height() == h){
+	queued[v->index()] = false;
+	int h = v->height();
+	int i = 0;
+ 	while (v->excess() != 0 && v->height() == h){
+ 		//cout << v->excess() << endl;
 		push_relabel(v, push_counter, relabel_counter);
 		vertex* w = v->cur_edge()->v_op();
-		if ( w->excess() > 0 && w != source && w!= sink ) {
+//		if ( w->excess() > 0 && w != source && w!= sink ) {
+		if (!queued[w->index()]) {
 			Q->push(w);
+			queued[w->index()] = true;
 		}
  	}
-// 	if ( v->excess() > 0 ) {
-// 		Q->push(v);
-// 	}
+	if ( v->excess() > 0 ) {
+		Q->push(v);
+	}
 }
 
 #endif
