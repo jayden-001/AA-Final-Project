@@ -29,7 +29,7 @@ class graph
 		vertex* s() { return &_vertices[0]; }
 		vertex* t() { return &_vertices[1]; }
 		vertex* v() { return _vertices; }
-		vertex* e() { return _edges; }
+		edge* e() { return _edges; }
 };
 
 graph::graph(int n, int m) : _n(n), _m(0)
