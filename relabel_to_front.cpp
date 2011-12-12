@@ -32,10 +32,9 @@ void initialize(graph *g)
 	vector<edge*>* edges = g->s()->edges();
 	for (int i = 0; i < edges->size(); i++) {
 		edge* e = edges->at(i);
-//		e->update_flow(g->s(), e->upper(g->s()));
-//		e->opposite(g->s())->update_excess(e->upper(g->s()));
 		e->push_flow(e->upper());
 		e->v_op()->update_excess(e->upper());
+		e->v_op()->set_height(1);
 	}
 }
 
@@ -84,4 +83,3 @@ void relabel_to_front(graph* g)
 	print("Push count: " << push_count);
 	print("Relabel count: " << relabel_count);
 }
-

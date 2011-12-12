@@ -12,7 +12,8 @@ ODIR = obj
 SRCS = main.cpp \
 sequential_maxflow.cpp \
 discharge.cpp parallel_maxflow.cpp reducer_list.cpp \
-relabel_to_front.cpp
+relabel_to_front.cpp \
+gap_heuristic.cpp
 HEADERS = graph.h vertex.h edge.h
 _OBJ = $(SRCS:.cpp=.o)
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJ))
