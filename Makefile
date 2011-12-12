@@ -12,6 +12,7 @@ ODIR = obj
 SRCS = main.cpp \
 sequential_maxflow.cpp \
 discharge.cpp parallel_maxflow.cpp reducer_list.cpp \
+edmond-karp.cpp \
 relabel_to_front.cpp \
 gap_heuristic.cpp
 HEADERS = graph.h vertex.h edge.h

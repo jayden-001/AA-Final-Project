@@ -9,6 +9,7 @@
 // #include "reducer_list.cpp"
 //#include "relabel_to_front.cpp"
 #include "gap_heuristic.cpp"
+#include "edmond-karp.cpp"
 
 #define print(x) std::cout << x << std::endl
 
@@ -16,12 +17,13 @@ void result(graph*, clock_t, clock_t);
 int parallel(graph*);
 int sequential(graph*);
 int gap(graph*);
+int edmondkarp(graph*);
 
 int main(int argc, char **argv)
 {
 	graph* g = generate_easy_graph(argv[1]);
 //	graph* g = generate_trivial_graph();
- 	gap(g);
+ 	edmondkarp(g);
  	g = generate_easy_graph(argv[1]);
 // 	g = generate_trivial_graph();
   sequential(g);
@@ -39,6 +41,17 @@ int main(int argc, char **argv)
 // 	result(g, start, end);
 //  	return 0;
 // }
+
+int edmondkarp(graph *g)
+{
+	clock_t start, end;
+  print("running edmond karp");
+  start = clock();
+	edmond_karp(g);
+  end = clock();
+  result(g, start, end);
+  return 0;
+}
 
 int gap(graph *g)
 {
