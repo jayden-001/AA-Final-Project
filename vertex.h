@@ -20,7 +20,6 @@ class vertex
 		int _index;
 		vector<edge*> _edges;
 
-
 	public:
 		vertex();
 		vertex(int);

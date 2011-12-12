@@ -4,31 +4,49 @@
 
 using namespace std;
 
-void global_update(graph* g)
+void global_update(graph* g, priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q)
 {
 	vertex* s = g->s();
 	vertex* t = g->t();
+	int n = g->n();
 
 	vertex* vertices = g->v();
-	for (int i = 2; i < g->n(); i++) {
-		(vertices + i)->set_height(g->n());
+	for (int i = 2; i < n; i++) {
+		vertices[i].set_height(n);
 	}
 	
-	queue<vertex*> bfsQ;
-	bfsQ.push(t);
-	while (bfsQ.size() > 0) {
-		vertex* v = bfsQ.front();
-		bfsQ.pop();
+	vertex** bfsQ = new vertex*[n];
+	vertex** frontPt = bfsQ;
+	vertex** backPt = bfsQ + 1;
+	*frontPt = t;
+
+	while (frontPt != backPt) {
+		vertex* v = *frontPt;
+		int new_height = v->height() + 1;
+		frontPt++;
 		vector<edge*>* edges = v->edges();
 		for (int i = 0; i < edges->size(); i++) {
 			edge* e = edges->at(i);
 			vertex* op = e->v_op();
-			if (e->reverse()->residue() != 0 && op->height() == g->n()) {
-				op->set_height(v->height()+1);
-				bfsQ.push(op);
+			if (e->reverse()->residue() != 0 && op->height() == n) {
+				op->set_height(new_height);
+				*backPt = op;
+				backPt++;
 			}
 		}
 	}
+	delete [] bfsQ;
+	
+	// reupdate queue
+	vector<vertex*> vs;
+	while (Q->size() != 0) {
+		vs.push_back(Q->top());
+		Q->pop();
+	}
+	for (int i = 0; i < vs.size(); i++) {
+		Q->push(vs[i]);
+	}
+	
 }
 
 void sequential_maxflow(graph* g)
@@ -39,6 +57,7 @@ void sequential_maxflow(graph* g)
 
 	vertex* s = g->s();
 	vertex* t = g->t();
+	int n = g->n();
  	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
 //	queue<vertex*> Q;
 	
@@ -53,16 +72,16 @@ void sequential_maxflow(graph* g)
 	}
 	
 	// initialize label
-	s->set_height(g->n());
-	global_update(g);
+	s->set_height(n);
+	global_update(g, &Q);
 	
 	// loop
 	while (Q.size() != 0) {
 		discharge(&Q, s, t, &push_counter, &relabel_counter);
 		discharge_counter++;
 		
-		if ((discharge_counter + 1) % g->n()  == 0) {
-			global_update(g);
+		if ((discharge_counter + 1) % n  == 0) {
+			global_update(g, &Q);
 		}
 	}
 	
