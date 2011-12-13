@@ -24,7 +24,7 @@ int edmondkarp(graph*);
 int main(int argc, char **argv)
 {
 	graph* g = generate_easy_graph(argv[1]);
-//	graph* g = generate_trivial_graph();
+//	graph* g = generate_bipartite_graph(1000,1000);
 // 	edmondkarp(g);
 //	gap(g);
 // 	g = generate_easy_graph(argv[1]);
