@@ -7,10 +7,10 @@
 
 using namespace std;
 
-graph* generate_easy_graph(const char* graph_file)
+graph* generate_easy_graph(string graph_file)
 {
 	ifstream reader;
-	reader.open(graph_file);
+	reader.open(graph_file.c_str());
 	
 	bool started = false;
 	int state = 0;
@@ -107,7 +107,6 @@ graph* generate_easy_graph(const char* graph_file)
 	
 }
 
-
 graph* generate_trivial_graph()
 {
 	graph* g = new graph(4,6);
@@ -119,6 +118,28 @@ graph* generate_trivial_graph()
 	g->add_edge(3,2,3);
 	g->add_edge(2,1,2);
 
+	return g;
+}
+
+graph* generate_bipartite_graph(int a, int b)
+{
+	graph* g = new graph(a+b+2, a*b+a+b);
+	
+	// add edges
+	for (int i = 2; i < a+2; i++) {
+		g->add_edge(0,i,rand()%1000+1);
+	}
+	
+	for (int i = 2; i < a+2; i++) {
+		for (int j = a+2; j < a+b+2; j++) {
+			g->add_edge(i,j,rand()%1000+1);
+		}
+	}
+	
+	for (int i = a+2; i < a+b+2; i++) {
+		g->add_edge(i,1,rand()%1000+1);
+	}
+	
 	return g;
 }
 
