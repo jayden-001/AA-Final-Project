@@ -48,7 +48,7 @@ void discharge(vertex *v)
  	while (v->excess() != 0) {
 		push_relabel(v, &push_count, &relabel_count);
 		vertex* w = v->cur_edge()->v_op();
-		if ( w->excess() > 0 &&  != s && w!= t) {
+		if ( w->excess() > 0 &&  w!= s && w!= t) {
 			if (!active[w->index()]) {
 				bucket[w->height()].push_front(w);
 				active[w->index()] = true;

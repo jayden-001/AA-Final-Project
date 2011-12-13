@@ -60,8 +60,8 @@ void sequential_maxflow(graph* g)
 	vertex* s = g->s();
 	vertex* t = g->t();
 	int n = g->n();
-// 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
-	queue<vertex*> Q;
+ 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
+//	queue<vertex*> Q;
 
 	// initialize preflow
 	vector<edge*>* edges = s->edges();
@@ -104,9 +104,10 @@ void sequential_maxflow_two_phases(graph* g)
 	vertex* s = g->s();
 	vertex* t = g->t();
 	int n = g->n();
-// 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
-	queue<vertex*> Q_first_phase;
-	queue<vertex*> Q_second_phase;
+ 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q_first_phase;
+	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q_second_phase;
+//	queue<vertex*> Q_first_phase;
+//	queue<vertex*> Q_second_phase;
 
 	// initialize preflow
 	vector<edge*>* edges = s->edges();
@@ -121,12 +122,13 @@ void sequential_maxflow_two_phases(graph* g)
 	
 	// initialize label
 	s->set_height(n);
-	global_update(g, &Q);
+	global_update(g, &Q_first_phase, true);
 
-	vertex* v, w;	
+	vertex* v;
+	vertex* w;	
 	// loop first phase
 	while (!Q_first_phase.empty()) {
-		v = Q_first_phase.front();	
+		v = Q_first_phase.top();	
 		Q_first_phase.pop();
 
 		while (v->excess() != 0 ){
@@ -152,7 +154,7 @@ void sequential_maxflow_two_phases(graph* g)
 	global_update(g, &Q_second_phase, false);
 
 	while ( !Q_second_phase.empty() ){
-		v = Q_second_phase.front();
+		v = Q_second_phase.top();
                 Q_second_phase.pop();
 
                 while (v->excess() != 0 ){
@@ -175,3 +177,99 @@ void sequential_maxflow_two_phases(graph* g)
 	cout << "Relabel counts: " << relabel_counter << endl;
 	cout << "Discharge counts first: " << discharge_counter1 << " second: " << discharge_counter2 <<endl;
 }
+
+/*
+void sequential_maxflow_two_phases_bucket(graph* g)
+{
+	int push_counter = 0;
+	int relabel_counter = 0;
+	int discharge_counter1 = 0;
+	int discharge_counter2 = 0;
+
+	vertex* s = g->s();
+	vertex* t = g->t();
+	int n = g->n();
+
+	vector<list<vertex*> > bucket;
+	vector<bool> active;
+	int highest;
+	int num_of_active_vertices = 0;
+
+	active.resize( n, false);
+	active[0] = true;
+        active[1] = true;
+	bucket.resize( n+1 ); // height can have value from 0 to n
+
+	// initialize preflow
+	s->set_height(n);
+	vector<edge*>* edges = s->edges();
+	for (int i = 0; i < edges->size(); i++) {
+		edge* e = edges->at(i);
+		if (e->residue() <= 0)
+			continue;
+		e->push_flow(e->residue());
+		vertex *op = e->v_out();
+		op->update_excess(e->upper());
+		active[op->index()] = true;
+                bucket[1].push_front(op);
+		num_of_active_vertices++;
+	}
+	highest = 1;
+	
+	// initialize label
+	global_update(g, &bucket, true);
+
+	vertex* v;
+	vertex* w;	
+	// loop first phase
+	while (num_of_active_vertices > 0) {
+		v = Q_first_phase.top();	
+		Q_first_phase.pop();
+
+		while (v->excess() != 0 ){
+			push_relabel(v, &push_counter, &relabel_counter);
+			w = v->cur_edge()->v_op();
+			if ( w->excess() > 0 && w != s && w != t){
+				if ( w->height() < n ){
+					Q_first_phase.push(w);
+				}
+				else {
+					Q_second_phase.push(w);
+				}
+			}
+		}
+
+		discharge_counter1++;
+		
+		if ((discharge_counter1 + 1) % n  == 0) {
+			global_update(g, &Q_first_phase, true);
+		}
+	}
+
+	global_update(g, &Q_second_phase, false);
+
+	while ( !Q_second_phase.empty() ){
+		v = Q_second_phase.top();
+                Q_second_phase.pop();
+
+                while (v->excess() != 0 ){
+                        push_relabel(v, &push_counter, &relabel_counter);
+                        w = v->cur_edge()->v_op();
+                        if ( w->excess() > 0 && w != s && w != t){
+                        	Q_second_phase.push(w);
+                        }
+                }
+
+                discharge_counter2++;
+
+                if ((discharge_counter2 + 1) % n  == 0) {
+                        global_update(g, &Q_second_phase, false);
+                }
+
+	}
+	
+	cout << "Push counts: " << push_counter << endl;
+	cout << "Relabel counts: " << relabel_counter << endl;
+	cout << "Discharge counts first: " << discharge_counter1 << " second: " << discharge_counter2 <<endl;
+
+}*/
