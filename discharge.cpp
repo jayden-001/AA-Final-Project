@@ -12,8 +12,6 @@
 
 using namespace std;
 
-// extern vector<bool> queued;
-
 void push(vertex* v, edge *e)
 {
 	assert(e->v() == v);
@@ -70,7 +68,6 @@ void push_relabel(vertex* v, int* push_counter, int* relabel_counter)
 void discharge(queue<vertex*>* Q, vertex* source, vertex* sink, int* push_counter, int* relabel_counter)
 {
 	vertex* v = Q->front();
-// 	queued[v->index()] = false;
 	Q->pop();
 	int h = v->height();
 	int i = 0;
@@ -78,9 +75,7 @@ void discharge(queue<vertex*>* Q, vertex* source, vertex* sink, int* push_counte
 		push_relabel(v, push_counter, relabel_counter);
 		vertex* w = v->cur_edge()->v_op();
 		if ( w->excess() > 0 && w != source && w!= sink ) {
-// 		if (!queued[w->index()]){ 
 			Q->push(w);
-// 			queued[w->index()] = true;
 		}
  	}
 // 	if ( v->excess() > 0 )
@@ -92,22 +87,13 @@ void discharge(priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q,
 {
 	vertex* v = Q->top();
 	Q->pop();
-// 	queued[v->index()] = false;
-	int h = v->height();
-	int i = 0;
- 	while (v->excess() != 0) {// && v->height() == h){
- 		//cout << v->excess() << endl;
+ 	while (v->excess() != 0) {
 		push_relabel(v, push_counter, relabel_counter);
 		vertex* w = v->cur_edge()->v_op();
 		if ( w->excess() > 0 && w != source && w!= sink ) {
-// 		if (!queued[w->index()]) {
 			Q->push(w);
-// 			queued[w->index()] = true;
 		}
  	}
-// 	if ( v->excess() > 0 ) {
-// 		Q->push(v);
-// 	}
 }
 
 #endif

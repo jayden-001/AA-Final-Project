@@ -63,9 +63,6 @@ void sequential_maxflow(graph* g)
 	int n = g->n();
  	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
 //	queue<vertex*> Q;
-// 	queued.resize(g->n(), false);
-// 	queued[0] = true;
-// 	queued[1] = true;
 
 	// initialize preflow
 	vector<edge*>* edges = s->edges();
@@ -76,7 +73,6 @@ void sequential_maxflow(graph* g)
 		e->push_flow(e->residue());
 		e->reverse()->v()->update_excess(e->upper());
 		Q.push(e->v_op());
-// 		queued[e->v_op()->index()] = true;
 	}
 	
 	// initialize label
