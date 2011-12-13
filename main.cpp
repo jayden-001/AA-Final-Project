@@ -11,7 +11,9 @@
 #include "gap_heuristic.cpp"
 #include "edmond-karp.cpp"
 
+#ifndef print
 #define print(x) std::cout << x << std::endl
+#endif
 
 void result(graph*, clock_t, clock_t);
 int parallel(graph*);
@@ -24,6 +26,7 @@ int main(int argc, char **argv)
 	graph* g = generate_easy_graph(argv[1]);
 //	graph* g = generate_trivial_graph();
  	edmondkarp(g);
+//	gap(g);
  	g = generate_easy_graph(argv[1]);
 // 	g = generate_trivial_graph();
   sequential(g);
