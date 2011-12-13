@@ -182,7 +182,8 @@ int sequential(graph *g)
 	clock_t start, end;
   print("running sequential push relabel");
   start = clock();
-	sequential_maxflow(g);
+  //sequential_maxflow(g);
+  sequential_maxflow_two_phases(g);
   end = clock();
   result(g, start, end);
   return 0;
