@@ -154,6 +154,7 @@ graph* generate_complete_graph(int graph_size)
 			g->add_edge(j,i,rand()%1000 + 1);
 		}
 	}
+	
 	return g;
 }
 
