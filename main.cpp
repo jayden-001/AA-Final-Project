@@ -103,6 +103,8 @@ int main(int argc, char **argv)
 			case 2:	// edmondkarp
 				edmondkarp(g);
 				break;
+			default:
+				error();
 		}
 	}
 	
@@ -110,18 +112,20 @@ int main(int argc, char **argv)
 		graph* g;
 	
 		switch (mode) {
-			case '0': // trivial
+			case 0: // trivial
 				g = generate_trivial_graph();
 				break;
-			case '1': // bipartite
+			case 1: // bipartite
 				g = generate_bipartite_graph(n1, n2);
 				break;
-			case '2': // complete
+			case 2: // complete
 				g = generate_complete_graph(n1);
 				break;
-			case '3': // dumbbell
+			case 3: // dumbbell
 				g = generate_dumbbell_graph(n1);
 				break;
+			default:
+				error();
 		}
 		
 		g->write_graph(filename);

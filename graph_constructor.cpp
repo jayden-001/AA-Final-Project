@@ -127,7 +127,7 @@ graph* generate_bipartite_graph(int a, int b)
 	
 	// add edges
 	for (int i = 2; i < a+2; i++) {
-		g->add_edge(0,i,rand()%1000+1);
+		g->add_edge(0,i,1000*b);
 	}
 	
 	for (int i = 2; i < a+2; i++) {
@@ -137,7 +137,7 @@ graph* generate_bipartite_graph(int a, int b)
 	}
 	
 	for (int i = a+2; i < a+b+2; i++) {
-		g->add_edge(i,1,rand()%1000+1);
+		g->add_edge(i,1,1000*a);
 	}
 	
 	return g;
