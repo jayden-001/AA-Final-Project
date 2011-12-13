@@ -26,7 +26,7 @@ void initialize(graph *g)
 	active[1] = true; 
 	bucket.resize(g->n() * 2);
 	g->s()->set_height(g->n());
-	vector<edge*>* edges = g->s()->edges();
+	vector<edge*>* edges = s->edges();
 	for (int i = 0; i < edges->size(); i++) {
 		edge* e = edges->at(i);
 		if (e->residue() == 0)
@@ -36,7 +36,7 @@ void initialize(graph *g)
 		op->update_excess(e->upper());
 //		op->set_height(1);
 		active[op->index()] = true;
-		bucket[0].push_front(op);
+		bucket[1].push_front(op);
 		++count;
 	}
 	highest = 1;
@@ -48,7 +48,7 @@ void discharge(vertex *v)
  	while (v->excess() != 0) {
 		push_relabel(v, &push_count, &relabel_count);
 		vertex* w = v->cur_edge()->v_op();
-		if ( w->excess() > 0 && w != s && w!= t) {
+		if ( w->excess() > 0 &&  != s && w!= t) {
 			if (!active[w->index()]) {
 				bucket[w->height()].push_front(w);
 				active[w->index()] = true;

@@ -59,8 +59,8 @@ void sequential_maxflow(graph* g)
 	vertex* s = g->s();
 	vertex* t = g->t();
 	int n = g->n();
- 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
-//	queue<vertex*> Q;
+// 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
+	queue<vertex*> Q;
 	queued.resize(g->n(), false);
 	queued[0] = true;
 	queued[1] = true;
@@ -94,4 +94,87 @@ void sequential_maxflow(graph* g)
 	cout << "Push counts: " << push_counter << endl;
 	cout << "Relabel counts: " << relabel_counter << endl;
 	cout << "Discharge counts: " << discharge_counter << endl;
+}
+
+
+void sequential_maxflow_two_phases(graph* g)
+{
+	int push_counter = 0;
+	int relabel_counter = 0;
+	int discharge_counter1 = 0;
+	int discharge_counter2 = 0;
+
+	vertex* s = g->s();
+	vertex* t = g->t();
+	int n = g->n();
+// 	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
+	queue<vertex*> Q_first_phase;
+	queue<vertex*> Q_second_phase;
+
+	// initialize preflow
+	vector<edge*>* edges = s->edges();
+	for (int i = 0; i < edges->size(); i++) {
+		edge* e = edges->at(i);
+		if (e->residue() <= 0)
+			continue;
+		e->push_flow(e->residue());
+		e->reverse()->v()->update_excess(e->upper());
+		Q_first_phase.push(e->v_op());
+	}
+	
+	// initialize label
+	s->set_height(n);
+	global_update(g, &Q);
+
+	vertex* v, w;	
+	// loop first phase
+	while (!Q_first_phase.empty()) {
+		v = Q_first_phase.front();	
+		Q_first_phase.pop();
+
+		while (v->excess() != 0 ){
+			push_relabel(v, &push_counter, &relabel_counter);
+			w = v->cur_edge()->v_op();
+			if ( w->excess() > 0 && w != s && w != t){
+				if ( w->height() < n ){
+					Q_first_phase.push(w);
+				}
+				else {
+					Q_second_phase.push(w);
+				}
+			}
+		}
+
+		discharge_counter1++;
+		
+		if ((discharge_counter1 + 1) % n  == 0) {
+			global_update(g, &Q_first_phase, true);
+		}
+	}
+
+	global_update(g, &Q_second_phase, false);
+
+	while ( !Q_second_phase.empty() ){
+		v = Q_second_phase.front();
+                Q_second_phase.pop();
+
+                while (v->excess() != 0 ){
+                        push_relabel(v, &push_counter, &relabel_counter);
+                        w = v->cur_edge()->v_op();
+                        if ( w->excess() > 0 && w != s && w != t){
+                        	Q_second_phase.push(w);
+                        }
+                }
+
+                discharge_counter2++;
+
+                if ((discharge_counter2 + 1) % n  == 0) {
+                        global_update(g, &Q_second_phase, false);
+                }
+
+	}
+	
+	cout << "Push counts: " << push_counter << endl;
+	cout << "Relabel counts: " << relabel_counter << endl;
+	cout << "Discharge counts first: " << discharge_counter1 << " second: " << discharge_counter2 <<endl;
 }
