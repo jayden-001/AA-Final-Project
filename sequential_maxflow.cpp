@@ -71,7 +71,8 @@ void sequential_maxflow(graph* g)
 			continue;
 		e->push_flow(e->residue());
 		e->reverse()->v()->update_excess(e->upper());
-		Q.push(e->v_op());
+		if (e->v_op() != t)
+			Q.push(e->v_op());
 	}
 	
 	// initialize label
@@ -117,7 +118,8 @@ void sequential_maxflow_two_phases(graph* g)
 			continue;
 		e->push_flow(e->residue());
 		e->reverse()->v()->update_excess(e->upper());
-		Q_first_phase.push(e->v_op());
+		if (e->v_op() != t)
+			Q_first_phase.push(e->v_op());
 	}
 	
 	// initialize label
