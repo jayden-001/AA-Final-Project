@@ -5,7 +5,7 @@
 using namespace std;
 vector<bool> queued;
 
-void global_update(graph* g, priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q)
+void global_update(graph* g, priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q, bool isToSink)
 {
 	vertex* s = g->s();
 	vertex* t = g->t();
@@ -15,11 +15,13 @@ void global_update(graph* g, priority_queue<vertex*, vector<vertex*>, CompareVer
 	for (int i = 2; i < n; i++) {
 		vertices[i].set_height(n);
 	}
+	if (!isToSink)
+		vertices[0].set_height(0);
 	
 	vertex** bfsQ = new vertex*[n];
 	vertex** frontPt = bfsQ;
 	vertex** backPt = bfsQ + 1;
-	*frontPt = t;
+	*frontPt = isToSink ? t : s;
 
 	while (frontPt != backPt) {
 		vertex* v = *frontPt;
@@ -61,9 +63,9 @@ void sequential_maxflow(graph* g)
 	int n = g->n();
  	priority_queue<vertex*, vector<vertex*>, CompareVertex> Q;
 //	queue<vertex*> Q;
-	queued.resize(g->n(), false);
-	queued[0] = true;
-	queued[1] = true;
+// 	queued.resize(g->n(), false);
+// 	queued[0] = true;
+// 	queued[1] = true;
 
 	// initialize preflow
 	vector<edge*>* edges = s->edges();
@@ -74,12 +76,12 @@ void sequential_maxflow(graph* g)
 		e->push_flow(e->residue());
 		e->reverse()->v()->update_excess(e->upper());
 		Q.push(e->v_op());
-		queued[e->v_op()->index()] = true;
+// 		queued[e->v_op()->index()] = true;
 	}
 	
 	// initialize label
 	s->set_height(n);
-	global_update(g, &Q);
+	global_update(g, &Q, true);
 	
 	// loop
 	while (!Q.empty()) {
@@ -87,7 +89,7 @@ void sequential_maxflow(graph* g)
 		discharge_counter++;
 		
 		if ((discharge_counter + 1) % n  == 0) {
-			global_update(g, &Q);
+			global_update(g, &Q, true);
 		}
 	}
 	

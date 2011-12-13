@@ -25,9 +25,9 @@ int main(int argc, char **argv)
 {
 	graph* g = generate_easy_graph(argv[1]);
 //	graph* g = generate_trivial_graph();
- 	edmondkarp(g);
+// 	edmondkarp(g);
 //	gap(g);
- 	g = generate_easy_graph(argv[1]);
+// 	g = generate_easy_graph(argv[1]);
 // 	g = generate_trivial_graph();
   sequential(g);
   return 0;
