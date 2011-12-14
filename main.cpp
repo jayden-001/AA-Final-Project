@@ -1,7 +1,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <assert.h>
-#include <time.h>
+#include "ktiming.h"
+#include "ktiming.c"
 #include "graph.h"
 #include "graph_constructor.cpp"
 #include "sequential_maxflow.cpp"
@@ -13,11 +14,11 @@
 
 using namespace std;
 
-#define print(x) cout << x << endl
+#define print(x) std::cout << x << std::endl
 
 #define OPS_NUM 5
 
-void result(graph*, clock_t, clock_t);
+void result(graph*, clockmark_t, clockmark_t);
 int parallel(graph*);
 int sequential(graph*);
 int gap(graph*);
@@ -151,11 +152,11 @@ int main(int argc, char **argv)
 
 int edmondkarp(graph *g)
 {
-	clock_t start, end;
+	clockmark_t start, end;
   print("running edmond karp");
-  start = clock();
+  start = ktiming_getmark();
 	edmond_karp(g);
-  end = clock();
+  end = ktiming_getmark();
   result(g, start, end);
   return 0;
 }
@@ -163,34 +164,34 @@ int edmondkarp(graph *g)
 int gap(graph *g)
 {
 	initialize(g);
-	clock_t start, end;
+	clockmark_t start, end;
   print("running gap relabel");
-  start = clock();
+  start = ktiming_getmark();
 	gap_relabel(g);
-  end = clock();
+  end = ktiming_getmark();
   result(g, start, end);
   return 0;
 }
 
 int sequential(graph *g)
 {
-	clock_t start, end;
+	clockmark_t start, end;
   print("running sequential push relabel");
-  start = clock();
+  start = ktiming_getmark();
   //sequential_maxflow(g);
   sequential_maxflow_two_phases(g);
-  end = clock();
+  end = ktiming_getmark();
   result(g, start, end);
   return 0;
 }
 
-void result(graph *g, clock_t start, clock_t end)
+void result(graph *g, clockmark_t start, clockmark_t end)
 {
 //    g->display_flow();
    if (g->is_valid_flow())
  		cout<<"flow is valid: "<<g->flow()<<endl;
    else
  		cout<<"flow is invalid"<<endl;
-	cout << ((double) (end - start)) / CLOCKS_PER_SEC
+	cout << ((double) ktiming_diff_sec(&start, &end))
 			<< " seconds in total" << endl;
 }
