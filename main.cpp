@@ -20,6 +20,7 @@ using namespace std;
 
 void result(graph*, clockmark_t, clockmark_t);
 int parallel(graph*);
+int fifo(graph*);
 int sequential(graph*);
 int gap(graph*);
 int edmondkarp(graph*);
@@ -37,7 +38,7 @@ int look_up(string s)
 
 void help() {
 	print("-f filename: I/O file");
-	print("-r: running mode (0=sequential, 1=gap, 2=edmondkarp)");
+	print("-r: running mode (0=highest_label, 1=FIFO, 2=gap, 3=edmondkarp)");
 	print("-g: generation mode (0=trivial, 1=bipartite, 2=complete, 3=dumbbell)");
 	print("-n1: argument 1 for graph generation");
 	print("-n2: argument 2 for graph generation");
@@ -93,13 +94,16 @@ int main(int argc, char **argv)
 		graph* g = generate_easy_graph(filename);
 	
 		switch (mode) {
-			case 0:	// sequential
+			case 0:	// highest_label
 				sequential(g);
 				break;
-			case 1:	// gap
+			case 1:	// sequential
+				fifo(g);
+				break;
+			case 2:	// gap
 				gap(g);
 				break;
-			case 2:	// edmondkarp
+			case 3:	// edmondkarp
 				edmondkarp(g);
 				break;
 			default:
@@ -168,6 +172,18 @@ int gap(graph *g)
   print("running gap relabel");
   start = ktiming_getmark();
 	gap_relabel(g);
+  end = ktiming_getmark();
+  result(g, start, end);
+  return 0;
+}
+
+int fifo(graph *g)
+{
+	clockmark_t start, end;
+  print("running sequential push relabel");
+  start = ktiming_getmark();
+  //sequential_maxflow(g);
+  sequential_maxflow_two_phases_fifo(g);
   end = ktiming_getmark();
   result(g, start, end);
   return 0;
