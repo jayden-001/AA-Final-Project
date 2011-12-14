@@ -2,6 +2,7 @@
 #define GRAPH_H
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <vector>
 #include "vertex.h"
@@ -22,7 +23,9 @@ class graph
 		void add_edge(int v1, int v2, int upper12j);
 		void display_upper();
 		void display_flow();
+		void write_graph(string name);
  		bool is_valid_flow();
+ 		
 		int flow();
 		int n() { return _n; }
 		int m() { return _m; }
@@ -113,6 +116,38 @@ int graph::flow()
 // 	}
 // 	return flow;
 	return t()->excess();
+}
+
+void graph::write_graph(string name)
+{
+	ofstream f;
+	f.open(name.c_str());
+	f << "p max " << _n << '\t' << _m/2 << '\n';
+	f << "n\t" << 1 << "\ts\n";
+	f << "n\t" << _n << "\tt\n";
+	
+	for (int i = 0; i < _m; i+=2) {
+		edge* e = _edges + i;
+		int v1 = e->v()->index();
+		int v2 = e->v_op()->index();
+		int upper = e->upper();
+		
+		if (v1 == 0) {
+			v1 = 1;
+		} else if (v1 == 1) {
+			v1 = _n;
+		}
+		
+		if (v2 == 0) {
+			v2 = 1;
+		} else if (v2 == 1) {
+			v2 = _n;
+		}
+		
+		f << "a\t" << v1 << '\t' << v2 << '\t' << upper <<'\n';
+	}
+	
+	f.close();
 }
 
 #endif
