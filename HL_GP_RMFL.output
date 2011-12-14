@@ -86,3 +86,255 @@ GAP counts: 5
 Discharge counts first: 78850830 second: 39834
 flow is valid: 16931
 32.5089 seconds in total
+n=7209
+m=65520
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 151405
+Relabel counts: 119898
+GAP counts: 3
+Discharge counts first: 140766 second: 851
+flow is valid: 1055
+0.0324229 seconds in total
+n=27716
+m=259766
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 2125278
+Relabel counts: 1909104
+GAP counts: 8
+Discharge counts first: 2084929 second: 1096
+flow is valid: 2313
+0.47908 seconds in total
+n=64768
+m=614784
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Push counts: 5798248
+Relabel counts: 5279889
+GAP counts: 4
+Discharge counts first: 5699285 second: 2129
+flow is valid: 3567
+1.35887 seconds in total
+n=127794
+m=1223410
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+n=225060
+m=2167792
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 56941782
+Relabel counts: 53857367
+GAP counts: 8
+Discharge counts first: 56554556 second: 13520
+flow is valid: 6967
+14.5391 seconds in total
+n=337536
+m=3261696
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 131051111
+Relabel counts: 124723465
+GAP counts: 7
+Discharge counts first: 130481764 second: 24404
+flow is valid: 8213
+34.7424 seconds in total
+n=521964
+m=5063526
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 134049659
+Relabel counts: 127772623
+GAP counts: 11
+Discharge counts first: 133113355 second: 32329
+flow is valid: 10641
+35.363 seconds in total
+n=718214
+m=6982330
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+n=1024000
+m=9981952
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 946830367
+Relabel counts: 911823964
+GAP counts: 4
+Discharge counts first: 945073076 second: 57463
+flow is valid: 14788
+265.501 seconds in total
+n=1334024
+m=13024040
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 1480419551
+Relabel counts: 1429812434
+GAP counts: 5
+Discharge counts first: 1478068279 second: 38289
+flow is valid: 16931
+418.069 seconds in total

@@ -182,7 +182,6 @@ int fifo(graph *g)
 	clockmark_t start, end;
   print("running sequential push relabel");
   start = ktiming_getmark();
-  //sequential_maxflow(g);
   sequential_maxflow_two_phases_fifo(g);
   end = ktiming_getmark();
   result(g, start, end);
@@ -194,8 +193,8 @@ int sequential(graph *g)
 	clockmark_t start, end;
   print("running sequential push relabel");
   start = ktiming_getmark();
-  //sequential_maxflow(g);
-  sequential_maxflow_two_phases_hlqueue(g);
+  sequential_maxflow_two_phases(g);
+  //sequential_maxflow_two_phases_hlqueue(g);
   end = ktiming_getmark();
   result(g, start, end);
   return 0;

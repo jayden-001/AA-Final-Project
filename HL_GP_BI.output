@@ -1,0 +1,82 @@
+n=2002
+m=2004000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1002000
+Relabel counts: 1000
+GAP counts: 1
+Discharge counts first: 2000 second: 0
+flow is valid: 15501623
+0.113791 seconds in total
+n=2402
+m=2884800
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1442400
+Relabel counts: 1200
+GAP counts: 1
+Discharge counts first: 2400 second: 0
+flow is valid: 22334940
+0.166974 seconds in total
+n=2802
+m=3925600
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1962800
+Relabel counts: 1400
+GAP counts: 1
+Discharge counts first: 2800 second: 0
+flow is valid: 30384176
+0.241229 seconds in total
+n=3202
+m=5126400
+Done generating easy graph!
+running sequential push relabel
+Push counts: 2563200
+Relabel counts: 1600
+GAP counts: 1
+Discharge counts first: 3200 second: 0
+flow is valid: 39676979
+0.31052 seconds in total
+n=3602
+m=6487200
+Done generating easy graph!
+running sequential push relabel
+n=4002
+m=8008000
+Done generating easy graph!
+running sequential push relabel
+n=402
+m=80800
+Done generating easy graph!
+running sequential push relabel
+Push counts: 40400
+Relabel counts: 200
+GAP counts: 1
+Discharge counts first: 400 second: 0
+flow is valid: 618914
+0.00265777 seconds in total
+n=802
+m=321600
+Done generating easy graph!
+running sequential push relabel
+Push counts: 160800
+Relabel counts: 400
+GAP counts: 1
+Discharge counts first: 800 second: 0
+flow is valid: 2476545
+0.0136097 seconds in total
+n=1202
+m=722400
+Done generating easy graph!
+running sequential push relabel
+Push counts: 361200
+Relabel counts: 600
+GAP counts: 1
+Discharge counts first: 1200 second: 0
+flow is valid: 5575302
+0.038512 seconds in total
+n=1602
+m=1283200
+Done generating easy graph!
+running sequential push relabel

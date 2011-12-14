@@ -12,6 +12,9 @@
 
 using namespace std;
 
+extern int heighest;
+extern vector<int> counter;
+
 void push(vertex* v, edge *e)
 {
 	assert(e->v() == v);
@@ -45,7 +48,7 @@ void relabel(vertex* v)
 	
 }
 
-void push_relabel(vertex* v, int* push_counter, int* relabel_counter)
+int push_relabel(vertex* v, int* push_counter, int* relabel_counter)
 {
 	assert(v->excess() > 0);	// must be active
 	edge* e = v->cur_edge();
@@ -58,10 +61,21 @@ void push_relabel(vertex* v, int* push_counter, int* relabel_counter)
 			v->next_edge();
 		} else {
 			v->next_edge();
+			int vh = v->height();
+			counter[vh]--;
 			relabel(v);
+			if (v->height() != counter.size()){
+				if (v->height() > heighest)
+					heighest = v->height();
+				counter[v->height()]++;
+			}
 			*relabel_counter += 1;
+			if ( counter[vh] == 0 && heighest > vh )
+                                return vh;
 		}
 	}
+
+	return -1;
 
 }
 

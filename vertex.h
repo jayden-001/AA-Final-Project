@@ -50,10 +50,10 @@ class vertex
 		bool is_last() { return _cur_edge == _last_edge; }
 };
 
-vertex::vertex() : _height(0), _excess(0), _cur_edge(0), _last_edge(0), _prev(NULL), _next(NULL)
+vertex::vertex() : _height(0), _excess(0), _cur_edge(0), _last_edge(0), _prev(this), _next(this)
 {}
 
-vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0), _last_edge(0),  _prev(NULL), _next(NULL)
+vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0), _last_edge(0),  _prev(this), _next(this)
 {}
 
 void vertex::add_edge(edge* e)
