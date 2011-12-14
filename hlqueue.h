@@ -24,9 +24,8 @@ class hlqueue
 		void remove(vertex* v);
 		void gap_relabel(int h);
 		bool contains(int i) { return _active[i]; }
-		bool contains(vertex *v) { return _active[vertex->index()]; }
+		bool contains(vertex *v) { return _active[v->index()]; }
 		bool empty() { return _size == 0; }
-		list<vertex*> remaining() { return _bucket[_n]; }
 };
 
 hlqueue::hlqueue(graph* g): _size(0), _highest(0), _n(g->n())
@@ -36,7 +35,7 @@ hlqueue::hlqueue(graph* g): _size(0), _highest(0), _n(g->n())
 	_active.resize(_n + 1, false);
 	_active[0] = true;
 	_active[1] = true;
-	_bucket.resize(_n + 1, new vertex());
+	_bucket.resize(_n + 1, NULL);
 }
 
 void hlqueue::push(vertex *v)
@@ -46,11 +45,11 @@ void hlqueue::push(vertex *v)
 	_size++;
 
 	v->set_next( _bucket[v->height()]->next() );
-	v->set_prev( _bucket[v->height()] );
-	_bucket[v->height()]->set_next(v);
+	_bucket[v->height()]->next()->set_prev(v);
+	_bucket[v->height()] = v;
 	_highest = max(_highest, v->height());
 
-	assert( _bucket[_highest]->next() != NULL );
+	assert( _bucket[_highest] != NULL );
 }
 
 void hlqueue::remove(vertex *v)
@@ -67,25 +66,25 @@ void hlqueue::remove(vertex *v)
 	v->set_prev(NULL);
 	v->set_next(NULL);
 
-	if (  _bucket[_highest]->next() == NULL )
+	if (  _bucket[_highest] == NULL )
 		_highest--;
 
-	assert( _bucket[_highest]->next() != NULL );
+	assert( _bucket[_highest] != NULL );
 }
 
 
 //return true if become empty
 vertex* hlqueue::pop()
 {
-	assert( _bucket[_highest]->next() != NULL );
+	assert( _bucket[_highest] != NULL );
 
 	_size--;
-	vertex *v = _bucket[_highest]->next();
-	_bucket[_highest]->set_next(v->next());
+	vertex *v = _bucket[_highest];
+	_bucket[_highest] = v->next();
 	_active[v->index()] = false;
-	if (_bucket[_highest]->next() == NULL)
+	if (_bucket[_highest] == NULL)
 		_highest--;
-	assert( _bucket[_highest]->next() != NULL );
+	assert( _bucket[_highest] != NULL );
 	return v;
 }
 /*

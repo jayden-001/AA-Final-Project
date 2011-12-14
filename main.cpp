@@ -195,7 +195,7 @@ int sequential(graph *g)
   print("running sequential push relabel");
   start = ktiming_getmark();
   //sequential_maxflow(g);
-  sequential_maxflow_two_phases(g);
+  sequential_maxflow_two_phases_hlqueue(g);
   end = ktiming_getmark();
   result(g, start, end);
   return 0;

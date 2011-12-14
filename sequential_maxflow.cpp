@@ -1,7 +1,7 @@
 #include "graph.h"
 #include "discharge.cpp"
 #include <queue>
-//#include "hlqueue.h"
+#include "hlqueue.h"
 
 using namespace std;
 
@@ -364,8 +364,8 @@ void sequential_maxflow_two_phases_hlqueue(graph* g)
 	vertex* t = g->t();
 	int n = g->n();
 	
-	hlqueue Q_first_phase;
-	hlqueue Q_second_phase;
+	hlqueue Q_first_phase(g);
+	hlqueue Q_second_phase(g);
 
 	// initialize preflow
 	vector<edge*>* edges = s->edges();
