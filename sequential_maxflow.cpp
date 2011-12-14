@@ -306,8 +306,8 @@ void sequential_maxflow_two_phases_fifo(graph* g)
 	cout << "Discharge counts first: " << discharge_counter1 << " second: " << discharge_counter2 <<endl;
 }
 
-/*
-void sequential_maxflow_two_phases_bucket(graph* g)
+
+void sequential_maxflow_two_phases_hlqueue(graph* g)
 {
 	int push_counter = 0;
 	int relabel_counter = 0;
@@ -317,47 +317,37 @@ void sequential_maxflow_two_phases_bucket(graph* g)
 	vertex* s = g->s();
 	vertex* t = g->t();
 	int n = g->n();
-
-	vector<list<vertex*> > bucket;
-	vector<bool> active;
-	int highest;
-	int num_of_active_vertices = 0;
-
-	active.resize( n, false);
-	active[0] = true;
-        active[1] = true;
-	bucket.resize( n+1 ); // height can have value from 0 to n
+	
+	hlqueue Q_first_phase;
+	hlqueue Q_second_phase;
 
 	// initialize preflow
-	s->set_height(n);
 	vector<edge*>* edges = s->edges();
 	for (int i = 0; i < edges->size(); i++) {
 		edge* e = edges->at(i);
 		if (e->residue() <= 0)
 			continue;
 		e->push_flow(e->residue());
-		vertex *op = e->v_out();
-		op->update_excess(e->upper());
-		active[op->index()] = true;
-                bucket[1].push_front(op);
-		num_of_active_vertices++;
+		e->reverse()->v()->update_excess(e->upper());
+		if (e->v_op() != t)
+			Q_first_phase.push(e->v_op());
 	}
-	highest = 1;
 	
 	// initialize label
-	global_update(g, &bucket, true);
+	s->set_height(n);
+	global_update(g, &Q_first_phase, true);
 
 	vertex* v;
 	vertex* w;	
 	// loop first phase
-	while (num_of_active_vertices > 0) {
-		v = Q_first_phase.top();	
-		Q_first_phase.pop();
+	while (!Q_first_phase.empty()) {
+		v = Q_first_phase.pop();
 
 		while (v->excess() != 0 ){
-			push_relabel(v, &push_counter, &relabel_counter);
 			w = v->cur_edge()->v_op();
-			if ( w->excess() > 0 && w != s && w != t){
+			int old_excess = w->excess();
+			push_relabel(v, &push_counter, &relabel_counter);
+			if ( old_excess == 0 && w->excess() > 0 && w != s && w != t){
 				if ( w->height() < n ){
 					Q_first_phase.push(w);
 				}
@@ -374,16 +364,16 @@ void sequential_maxflow_two_phases_bucket(graph* g)
 		}
 	}
 
-	global_update(g, &Q_second_phase, false);
+	global_update(g, &Q_second_phase ,false);
 
 	while ( !Q_second_phase.empty() ){
-		v = Q_second_phase.top();
-                Q_second_phase.pop();
+		v = Q_second_phase.pop();
 
                 while (v->excess() != 0 ){
-                        push_relabel(v, &push_counter, &relabel_counter);
                         w = v->cur_edge()->v_op();
-                        if ( w->excess() > 0 && w != s && w != t){
+                        int old_excess = w->excess();
+                        push_relabel(v, &push_counter, &relabel_counter);
+                        if ( old_excess == 0 && w->excess() > 0 && w != s && w != t){
                         	Q_second_phase.push(w);
                         }
                 }
@@ -391,7 +381,7 @@ void sequential_maxflow_two_phases_bucket(graph* g)
                 discharge_counter2++;
 
                 if ((discharge_counter2 + 1) % n  == 0) {
-                        global_update(g, &Q_second_phase, false);
+                        global_update(g,&Q_second_phase, false);
                 }
 
 	}
@@ -399,5 +389,4 @@ void sequential_maxflow_two_phases_bucket(graph* g)
 	cout << "Push counts: " << push_counter << endl;
 	cout << "Relabel counts: " << relabel_counter << endl;
 	cout << "Discharge counts first: " << discharge_counter1 << " second: " << discharge_counter2 <<endl;
-
-}*/
+}
