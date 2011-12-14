@@ -13,9 +13,7 @@
 
 using namespace std;
 
-#ifndef print
 #define print(x) cout << x << endl
-#endif
 
 #define OPS_NUM 5
 
@@ -134,11 +132,8 @@ int main(int argc, char **argv)
 //	graph* g = generate_bipartite_graph(100,100);
 //	g->write_graph(argv[1]);
 //	graph* g = generate_bipartite_graph(1000,1000);
-// 	edmondkarp(g);
 //	gap(g);
 // 	g = generate_easy_graph(argv[1]);
-// 	g = generate_trivial_graph();
-//  sequential(g);
 	return 0;
 }
 
