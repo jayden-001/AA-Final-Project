@@ -1,0 +1,90 @@
+n=1000
+m=1998000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 4178
+Relabel counts: 983
+Discharge counts first: 1632 second: 0
+flow is valid: 499702
+0.185889 seconds in total
+n=100
+m=19800
+Done generating easy graph!
+running sequential push relabel
+Push counts: 354
+Relabel counts: 92
+Discharge counts first: 164 second: 0
+flow is valid: 47353
+0.000723985 seconds in total
+n=200
+m=79600
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1022
+Relabel counts: 265
+Discharge counts first: 409 second: 5
+flow is valid: 98865
+0.00350187 seconds in total
+n=300
+m=179400
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1564
+Relabel counts: 420
+Discharge counts first: 607 second: 6
+flow is valid: 146829
+0.00864104 seconds in total
+n=400
+m=319200
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1650
+Relabel counts: 395
+Discharge counts first: 661 second: 0
+flow is valid: 201236
+0.0163964 seconds in total
+n=500
+m=499000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1975
+Relabel counts: 477
+Discharge counts first: 806 second: 0
+flow is valid: 251833
+0.0319084 seconds in total
+n=600
+m=718800
+Done generating easy graph!
+running sequential push relabel
+Push counts: 2397
+Relabel counts: 558
+Discharge counts first: 967 second: 0
+flow is valid: 303437
+0.0507022 seconds in total
+n=700
+m=978600
+Done generating easy graph!
+running sequential push relabel
+Push counts: 2775
+Relabel counts: 677
+Discharge counts first: 1159 second: 0
+flow is valid: 350486
+0.0756171 seconds in total
+n=800
+m=1278400
+Done generating easy graph!
+running sequential push relabel
+Push counts: 3273
+Relabel counts: 778
+Discharge counts first: 1310 second: 0
+flow is valid: 398630
+0.106472 seconds in total
+n=900
+m=1618200
+Done generating easy graph!
+running sequential push relabel
+Push counts: 3676
+Relabel counts: 884
+Discharge counts first: 1503 second: 0
+flow is valid: 449390
+0.140044 seconds in total

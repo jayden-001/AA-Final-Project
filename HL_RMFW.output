@@ -74,3 +74,17 @@ n=1008016
 m=9922030
 Done generating easy graph!
 running sequential push relabel
+Push counts: 151390150
+Relabel counts: 84043102
+Discharge counts first: 146441577 second: 170815
+flow is valid: 972839
+73.6766 seconds in total
+n=1351908
+m=13321680
+Done generating easy graph!
+running sequential push relabel
+Push counts: 236887116
+Relabel counts: 133330343
+Discharge counts first: 229675544 second: 329495
+flow is valid: 1230214
+128.129 seconds in total

@@ -1,6 +1,7 @@
 #include "graph.h"
 #include "discharge.cpp"
 #include <queue>
+#include "hlqueue.h"
 
 using namespace std;
 
