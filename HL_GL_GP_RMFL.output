@@ -1,0 +1,237 @@
+n=7209
+m=65520
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 74811
+Relabel counts: 49091
+GAP counts: 3
+Discharge counts first: 64788 second: 851
+flow is valid: 1055
+0.0178167 seconds in total
+n=27716
+m=259766
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 484123
+Relabel counts: 359716
+GAP counts: 8
+Discharge counts first: 443795 second: 1096
+flow is valid: 2313
+0.137699 seconds in total
+n=64768
+m=614784
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Push counts: 1635311
+Relabel counts: 1296852
+GAP counts: 4
+Discharge counts first: 1535912 second: 2166
+flow is valid: 3567
+0.474872 seconds in total
+n=127794
+m=1223410
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+n=225060
+m=2167792
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 9433320
+Relabel counts: 8002199
+GAP counts: 8
+Discharge counts first: 9051047 second: 14307
+flow is valid: 6967
+2.94993 seconds in total
+n=337536
+m=3261696
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 16797268
+Relabel counts: 14492139
+GAP counts: 7
+Discharge counts first: 16228066 second: 24110
+flow is valid: 8213
+5.41328 seconds in total
+n=521964
+m=5063526
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 29173375
+Relabel counts: 25635963
+GAP counts: 11
+Discharge counts first: 28240589 second: 31405
+flow is valid: 10641
+9.05194 seconds in total
+n=718214
+m=6982330
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+n=1024000
+m=9981952
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 76095757
+Relabel counts: 68101406
+GAP counts: 4
+Discharge counts first: 74350287 second: 57439
+flow is valid: 14788
+26.1222 seconds in total
+n=1334024
+m=13024040
+Done generating easy graph!
+running sequential push relabel
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Active node here
+push to q2
+push to q2
+Push counts: 109362495
+Relabel counts: 98815094
+GAP counts: 5
+Discharge counts first: 107028946 second: 38418
+flow is valid: 16931
+37.7635 seconds in total

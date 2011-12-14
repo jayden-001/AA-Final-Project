@@ -1,0 +1,431 @@
+n=7776
+m=73440
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 246270
+Relabel counts: 129262
+GAP counts: 0
+Discharge counts first: 224531 second: 1337
+flow is valid: 19601
+0.0540454 seconds in total
+n=27848
+m=267742
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 1468804
+Relabel counts: 836623
+GAP counts: 0
+Discharge counts first: 1374287 second: 3182
+flow is valid: 53407
+0.367558 seconds in total
+n=63504
+m=614880
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 4100138
+Relabel counts: 2286137
+GAP counts: 0
+Discharge counts first: 3872112 second: 2778
+flow is valid: 107738
+1.36168 seconds in total
+n=118810
+m=1155618
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+n=221952
+m=2169472
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 22044899
+Relabel counts: 13174030
+GAP counts: 0
+Discharge counts first: 21003774 second: 56697
+flow is valid: 284978
+8.10452 seconds in total
+n=349648
+m=3425632
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 37455222
+Relabel counts: 22464496
+GAP counts: 0
+Discharge counts first: 35873051 second: 79466
+flow is valid: 415131
+14.5698 seconds in total
+n=516096
+m=5065728
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 70742221
+Relabel counts: 42929581
+GAP counts: 0
+Discharge counts first: 67727516 second: 415935
+flow is valid: 568603
+35.831 seconds in total
+n=732615
+m=7201948
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 104550142
+Relabel counts: 63681359
+GAP counts: 0
+Discharge counts first: 100778636 second: 298953
+flow is valid: 755534
+44.0413 seconds in total
+n=1008016
+m=9922030
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 154311706
+Relabel counts: 93639713
+GAP counts: 0
+Discharge counts first: 149035721 second: 182929
+flow is valid: 972839
+71.0483 seconds in total
+n=1351908
+m=13321680
+Done generating easy graph!
+running sequential push relabel
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+push to q2
+Push counts: 228848654
+Relabel counts: 140060070
+GAP counts: 0
+Discharge counts first: 221616376 second: 208848
+flow is valid: 1230214
+114.667 seconds in total
