@@ -127,17 +127,17 @@ graph* generate_bipartite_graph(int a, int b)
 	
 	// add edges
 	for (int i = 2; i < a+2; i++) {
-		g->add_edge(0,i,1000*b);
+		g->add_edge(0,i,30*b);
 	}
 	
 	for (int i = 2; i < a+2; i++) {
 		for (int j = a+2; j < a+b+2; j++) {
-			g->add_edge(i,j,rand()%1000+1);
+			g->add_edge(i,j,rand()%30+1);
 		}
 	}
 	
 	for (int i = a+2; i < a+b+2; i++) {
-		g->add_edge(i,1,1000*a);
+		g->add_edge(i,1,30*a);
 	}
 	
 	return g;
