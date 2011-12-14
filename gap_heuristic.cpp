@@ -24,6 +24,7 @@ void initialize(graph *g)
 	active.resize(g->n(), false);
 	active[0] = true;
 	active[1] = true; 
+	highest = 1;
 	bucket.resize(g->n() * 2);
 	g->s()->set_height(g->n());
 	vector<edge*>* edges = g->s()->edges();
@@ -34,15 +35,14 @@ void initialize(graph *g)
 		e->push_flow(e->residue());
 		vertex *op = e->v_op();
 		op->update_excess(e->upper());
-//		op->set_height(1);
+		op->set_height(1);
 		active[op->index()] = true;
-		bucket[0].push_front(op);
+		bucket[1].push_front(op);
 		++count;
 	}
-	highest = 1;
 }
 
-void discharge(vertex *v)
+void discharge1(vertex *v)
 {
 	int h = v->height();
  	while (v->excess() != 0) {
@@ -61,7 +61,7 @@ void discharge(vertex *v)
  	}
 }
 
-void discharge1(vertex *v)
+void discharge(vertex *v)
 {
 	edge *cur;
 	while (v->excess() > 0) {
@@ -79,7 +79,7 @@ void discharge1(vertex *v)
 			push_count++;
 //			print("vertex " << v->index() << ", excess: " << v->excess());
 		}
-		if (v->is_last()) {
+		else if (v->is_last()) {
 			relabel(v);
 			relabel_count++;
 //			print("vertex: " << v->index() << ", height: " << v->height());
@@ -92,21 +92,12 @@ void gap_relabel(graph *g)
 {
 	int c = 0;
 	int gap = 0;
-	g->display_flow();
+//	g->display_flow();
 	while (count > 0) {
-		int total = 0;
-		int highest = -1;
-		for (int i = 0; i < 2*g->n(); ++i) {
-			if (!bucket[i].empty()) {
-				highest = i;
-				total += bucket[i].size();
-			}
-		}
-//		if (highest == -1) {
-//			for (int i = g->n(); i < g->n() * 2; ++i) {
-//				if (!bucket[i].empty()) {
-//					highest = i;
-//				}
+//		print("highest: " << highest);
+//		for (int i = 0; i < 2*g->n(); ++i) {
+//			if (!bucket[i].empty()) {
+//				highest = i;
 //			}
 //		}
 		int oldh = highest;
@@ -114,37 +105,38 @@ void gap_relabel(graph *g)
 //		print("current highest: " << highest);
 		vertex *f = bucket[highest].front();
 		bucket[highest].pop_front();
-//		if (highest >= g->n())
-//			print(f->index() << "pushing back to source");
 		count--;
 		discharge(f);
 		active[f->index()] = false;
-//		g->display_flow();
-		if (oldh != highest) {
-			print("oldh: " << oldh << ", highest: " << highest);
-			if (bucket[oldh].empty())
-				print("oldh is empty");
-			if (bucket[highest].empty())
-				print("highest is empty");
-		}
 
 		vertex *v = g->v();
-		if (bucket[highest].empty()) {
+		if (bucket[oldh].empty()) {
+			while (bucket[highest--].empty());
+			print("next highest " << highest);
 			gap++;
-			for (int i = 2; i < g->n(); ++i) {
-				int h = v[i].height();
-				if (v[i].height() > highest && active[v[i].index()]) {
-					v[i].set_height(max(h, g->n()));
-//					print(v[i].index() << " height: " << v[i].height());
-					c++;
-//					if (v[i].excess() > 0)
-//						print("has excess");
+//			for (int i = 2; i < g->n(); ++i) {
+//				int h = v[i].height();
+//				if (v[i].height() > oldh && active[v[i].index()]) {
+//					v[i].set_height(max(h, g->n()));
+//					highest = max(v[i].height(), highest);
+//				}
+//			}		
+			list<vertex*>::iterator it = bucket[g->n()].begin();
+			list<vertex*>::iterator j;
+			for (int i = oldh + 1; i < g->n(); ++i) {
+				if (bucket[i].empty())
+					continue;
+				highest = g->n();
+				bucket[g->n()].splice(it, bucket[i]);
+				for (j = bucket[i].begin(); j != bucket[i].end(); ++j) {
+					(*j)->set_height(g->n());
 				}
-			}		
+			}
+			print("highest after gap relabel: " << highest);
 		}
-//		print("c: " <<  c);
+		if (bucket[highest].empty())
+			print("bucket " << highest << " empty");
 	}
-	print("Gap relabel: " << c);
 	print("Push count: " << push_count);
 	print("Relabel count: " << relabel_count);
 	print("Gap count: " << gap);
