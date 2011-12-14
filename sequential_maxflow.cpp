@@ -170,9 +170,10 @@ void sequential_maxflow_two_phases(graph* g)
 		Q_first_phase.pop();
 
 		while (v->excess() != 0 ){
-			push_relabel(v, &push_counter, &relabel_counter);
 			w = v->cur_edge()->v_op();
-			if ( w->excess() > 0 && w != s && w != t){
+			int old_excess = w->excess();
+			push_relabel(v, &push_counter, &relabel_counter);
+			if ( old_excess == 0 && w->excess() > 0 && w != s && w != t){
 				if ( w->height() < n ){
 					Q_first_phase.push(w);
 				}
@@ -196,9 +197,10 @@ void sequential_maxflow_two_phases(graph* g)
                 Q_second_phase.pop();
 
                 while (v->excess() != 0 ){
+                		w = v->cur_edge()->v_op();
+						int old_excess = w->excess();
                         push_relabel(v, &push_counter, &relabel_counter);
-                        w = v->cur_edge()->v_op();
-                        if ( w->excess() > 0 && w != s && w != t){
+                        if ( old_excess == 0 && w->excess() > 0 && w != s && w != t){
                         	Q_second_phase.push(w);
                         }
                 }
@@ -255,9 +257,10 @@ void sequential_maxflow_two_phases_fifo(graph* g)
 		Q_first_phase.pop();
 
 		while (v->excess() != 0 ){
-			push_relabel(v, &push_counter, &relabel_counter);
 			w = v->cur_edge()->v_op();
-			if ( w->excess() > 0 && w != s && w != t){
+			int old_excess = w->excess();
+			push_relabel(v, &push_counter, &relabel_counter);
+			if ( old_excess == 0 && w->excess() > 0 && w != s && w != t){
 				if ( w->height() < n ){
 					Q_first_phase.push(w);
 				}
@@ -281,9 +284,10 @@ void sequential_maxflow_two_phases_fifo(graph* g)
                 Q_second_phase.pop();
 
                 while (v->excess() != 0 ){
-                        push_relabel(v, &push_counter, &relabel_counter);
                         w = v->cur_edge()->v_op();
-                        if ( w->excess() > 0 && w != s && w != t){
+                        int old_excess = w->excess();
+                        push_relabel(v, &push_counter, &relabel_counter);
+                        if ( old_excess == 0 && w->excess() > 0 && w != s && w != t){
                         	Q_second_phase.push(w);
                         }
                 }

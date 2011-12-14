@@ -72,9 +72,10 @@ void discharge(queue<vertex*>* Q, vertex* source, vertex* sink, int* push_counte
 	int h = v->height();
 	int i = 0;
  	while (v->excess() != 0) { // && v->height() == h){
+ 		vertex* w = v->cur_edge()->v_op();
+		int old_excess = w->excess();
 		push_relabel(v, push_counter, relabel_counter);
-		vertex* w = v->cur_edge()->v_op();
-		if ( w->excess() > 0 && w != source && w!= sink ) {
+		if ( old_excess == 0 && w->excess() > 0 && w != source && w!= sink ) {
 			Q->push(w);
 		}
  	}
@@ -88,9 +89,10 @@ void discharge(priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q,
 	vertex* v = Q->top();
 	Q->pop();
  	while (v->excess() != 0) {
+ 		vertex* w = v->cur_edge()->v_op();
+		int old_excess = w->excess();
 		push_relabel(v, push_counter, relabel_counter);
-		vertex* w = v->cur_edge()->v_op();
-		if ( w->excess() > 0 && w != source && w!= sink ) {
+		if ( old_excess == 0 && w->excess() > 0 && w != source && w!= sink ) {
 			Q->push(w);
 		}
  	}
