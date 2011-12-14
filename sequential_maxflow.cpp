@@ -1,9 +1,55 @@
 #include "graph.h"
 #include "discharge.cpp"
 #include <queue>
-#include "hlqueue.h"
+//#include "hlqueue.h"
 
 using namespace std;
+
+void global_update(graph* g, hlqueue* Q, bool isToSink)
+{
+	vertex* s = g->s();
+	vertex* t = g->t();
+	int n = g->n();
+
+	vertex* vertices = g->v();
+	for (int i = 2; i < n; i++) {
+		vertices[i].set_height(n);
+	}
+	if (!isToSink)
+		vertices[0].set_height(0);
+	
+	vertex** bfsQ = new vertex*[n];
+	vertex** frontPt = bfsQ;
+	vertex** backPt = bfsQ + 1;
+	*frontPt = isToSink ? t : s;
+
+	while (frontPt != backPt) {
+		vertex* v = *frontPt;
+		int new_height = v->height() + 1;
+		frontPt++;
+		vector<edge*>* edges = v->edges();
+		for (int i = 0; i < edges->size(); i++) {
+			edge* e = edges->at(i);
+			vertex* op = e->v_op();
+			if (e->reverse()->residue() != 0 && op->height() == n) {
+				op->set_height(new_height);
+				*backPt = op;
+				backPt++;
+			}
+		}
+	}
+	delete [] bfsQ;
+	
+	// reupdate queue
+	vector<vertex*> vs;
+	while (Q->size() != 0) {
+		vs.push_back(Q->pop());
+	}
+	for (int i = 0; i < vs.size(); i++) {
+		Q->push(vs[i]);
+	}
+	
+}
 
 void global_update(graph* g, priority_queue<vertex*, vector<vertex*>, CompareVertex>* Q, bool isToSink)
 {
