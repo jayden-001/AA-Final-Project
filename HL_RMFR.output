@@ -1,0 +1,90 @@
+n=8000
+m=76000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 174206
+Relabel counts: 104045
+Discharge counts first: 157070 second: 929
+flow is valid: 5922
+0.0411641 seconds in total
+n=27000
+m=261000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 727173
+Relabel counts: 464372
+Discharge counts first: 666261 second: 1900
+flow is valid: 13459
+0.182375 seconds in total
+n=64000
+m=624000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1873542
+Relabel counts: 1249162
+Discharge counts first: 1720927 second: 9177
+flow is valid: 24056
+0.593775 seconds in total
+n=125000
+m=1225000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 4237380
+Relabel counts: 2910192
+Discharge counts first: 3947973 second: 4077
+flow is valid: 37961
+1.65084 seconds in total
+n=216000
+m=2124000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 8809730
+Relabel counts: 6287010
+Discharge counts first: 8243912 second: 31011
+flow is valid: 54562
+3.28118 seconds in total
+n=343000
+m=3381000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 16058594
+Relabel counts: 11679096
+Discharge counts first: 14992724 second: 176352
+flow is valid: 74268
+5.77321 seconds in total
+n=512000
+m=5056000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 24328894
+Relabel counts: 17629829
+Discharge counts first: 23024481 second: 31491
+flow is valid: 97687
+10.763 seconds in total
+n=729000
+m=7209000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 40108953
+Relabel counts: 29401295
+Discharge counts first: 38162873 second: 10970
+flow is valid: 123910
+16.1933 seconds in total
+n=1000000
+m=9900000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 59217554
+Relabel counts: 44472851
+Discharge counts first: 56377730 second: 84017
+flow is valid: 152879
+25.6176 seconds in total
+n=1331000
+m=13189000
+Done generating easy graph!
+running sequential push relabel
+Push counts: 81382527
+Relabel counts: 60992304
+Discharge counts first: 77779186 second: 35269
+flow is valid: 185394
+38.8055 seconds in total

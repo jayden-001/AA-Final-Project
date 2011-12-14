@@ -83,3 +83,8 @@ n=1351908
 m=13321680
 Done generating easy graph!
 running sequential push relabel
+Push counts: 289119064
+Relabel counts: 105539142
+Discharge counts first: 278387101 second: 47861
+flow is valid: 1230214
+201.295 seconds in total

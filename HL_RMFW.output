@@ -1,0 +1,76 @@
+n=7776
+m=73440
+Done generating easy graph!
+running sequential push relabel
+Push counts: 212068
+Relabel counts: 104312
+Discharge counts first: 191853 second: 1257
+flow is valid: 19601
+0.0479948 seconds in total
+n=27848
+m=267742
+Done generating easy graph!
+running sequential push relabel
+Push counts: 1256542
+Relabel counts: 642841
+Discharge counts first: 1169115 second: 2912
+flow is valid: 53407
+0.326757 seconds in total
+n=63504
+m=614880
+Done generating easy graph!
+running sequential push relabel
+Push counts: 3910556
+Relabel counts: 1975886
+Discharge counts first: 3691583 second: 2199
+flow is valid: 107738
+1.50702 seconds in total
+n=118810
+m=1155618
+Done generating easy graph!
+running sequential push relabel
+Push counts: 9756536
+Relabel counts: 5125970
+Discharge counts first: 9272092 second: 29298
+flow is valid: 182271
+3.32126 seconds in total
+n=221952
+m=2169472
+Done generating easy graph!
+running sequential push relabel
+Push counts: 20404652
+Relabel counts: 11094415
+Discharge counts first: 19463018 second: 26626
+flow is valid: 284978
+8.19736 seconds in total
+n=349648
+m=3425632
+Done generating easy graph!
+running sequential push relabel
+Push counts: 39312201
+Relabel counts: 21305874
+Discharge counts first: 37709960 second: 76520
+flow is valid: 415131
+16.2021 seconds in total
+n=516096
+m=5065728
+Done generating easy graph!
+running sequential push relabel
+Push counts: 63076638
+Relabel counts: 35585747
+Discharge counts first: 60355376 second: 266881
+flow is valid: 568603
+25.1348 seconds in total
+n=732615
+m=7201948
+Done generating easy graph!
+running sequential push relabel
+Push counts: 109621624
+Relabel counts: 60295219
+Discharge counts first: 105667155 second: 594501
+flow is valid: 755534
+46.9507 seconds in total
+n=1008016
+m=9922030
+Done generating easy graph!
+running sequential push relabel

@@ -13,6 +13,10 @@ class edge;
 class vertex
 {
 	private:
+
+		vertex* _prev;
+		vertex* _next;		
+
 		int _height;
 		int _excess;
 		int _cur_edge;
@@ -32,7 +36,13 @@ class vertex
 		
 		int excess() { return _excess; }
 		void update_excess(int);
-		
+
+		vertex* prev() { return _prev; }
+		void set_prev(vertex* p) { _prev = p; }
+
+		vertex* next() { return _next; }
+		void set_next(vertex* n) { _next = n; }		
+
 		void add_edge(edge*);
 		vector<edge*>* edges() { return &_edges; }
 		edge* next_edge();
@@ -40,10 +50,10 @@ class vertex
 		bool is_last() { return _cur_edge == _last_edge; }
 };
 
-vertex::vertex() : _height(0), _excess(0), _cur_edge(0), _last_edge(0)
+vertex::vertex() : _height(0), _excess(0), _cur_edge(0), _last_edge(0), _prev(NULL), _next(NULL)
 {}
 
-vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0), _last_edge(0)
+vertex::vertex(int i) : _index(i), _height(0), _excess(0), _cur_edge(0), _last_edge(0),  _prev(NULL), _next(NULL)
 {}
 
 void vertex::add_edge(edge* e)
